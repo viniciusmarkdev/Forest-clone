@@ -1,0 +1,148 @@
+:root {
+    --primary-color: rgb(140, 201, 20);
+    --background-color: rgb(81, 163, 135);
+     --color-white: rgb(255, 255, 255)
+  }
+
+  *{
+
+    margin:0;
+    padding: 0;
+  }
+
+  body{
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+     height: 100vh;
+     background: var(--background-color);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+
+  }
+
+  
+  /*hide audio*/
+
+  .dnone{
+
+    display: none;
+
+  }
+
+  .content{
+
+
+    .content-timer{
+
+        display: flex;
+        justify-content: center;
+        padding-top: 5rem;
+
+        .content-h,
+        .content-m,
+        .content-s{
+
+            width: 16rem;
+            height: 10rem;
+
+            .time{
+
+                font-size: 130px;
+                color: var(--color-white);
+                font-weight: 300;
+                text-align: center;
+
+                span{
+
+                    font-size: 3.5rem;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .content-btn{
+            text-align: center;
+            
+            button{
+                font-size: 2.8rem;
+                width: 3rem;
+                margin:0 10px;
+                border-radius: 10px;
+                border: none;
+                outline : inherit;
+                color : var(--primary-color)
+
+            }
+
+            :hover{
+
+                background-color: var(--background-color) ;
+                transition: 0.5s;
+                transform: scale(0.8);
+                cursor:pointer
+            }
+        }
+
+    }
+    
+    .content-btn-action{
+
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+        padding-bottom: 3rem;
+
+        button{
+
+            font-size: 5rem;
+            width: 6.5rem;
+            margin: 0 30px;
+            border-radius: 20px;
+            border : none;
+            outline: inherit;
+            color: var(--primary-color);
+            background-color: var(--background-color);
+
+            &:hover{
+
+                background-color: var( --color-white);
+                transition: 0.6s;
+                transform: scale(0.8);
+                cursor:pointer
+            }
+
+            &:disabled{
+
+                opacity: 0.3;
+            }
+        }
+
+    }
+  }
+
+  .move{
+
+    animation: move_time 1.3s infinite;
+
+  }
+
+  @keyframes move_time {
+
+    20%,
+    50%,
+    80%{
+        transform: translateY(0px);
+    }
+
+    30%{
+        transform: translateY(-45px);
+    }
+
+    60%{
+        transform: translateY(-25px);
+    }
+    
+  }
