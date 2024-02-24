@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ForestComponent } from '../icons/forest/forest.component';
 
 @Component({
   selector: 'app-timer',
