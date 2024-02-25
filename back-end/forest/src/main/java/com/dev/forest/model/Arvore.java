@@ -17,12 +17,11 @@ public class Arvore {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
-	@NotNull(message = "O atributo Descrição deve ser obrigatório")
 	private String marcador;
 
-	@NotNull(message = "O atributo Descrição deve ser obrigatório")
+
 	private String descricao;
 
 	@Column(name = "running")
@@ -31,6 +30,7 @@ public class Arvore {
 	@Column(name = "hora_de_plantio", columnDefinition = "TIME")
 	private Time horaPlantio = new java.sql.Time(System.currentTimeMillis());
 
+	@NotNull
 	@Column(name = "tempo_de_concetracao_min")
 	private String tempoConcentracao;
 
@@ -40,11 +40,13 @@ public class Arvore {
 	
 	
 
-	public Long getId() {
+	
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -88,6 +90,12 @@ public class Arvore {
 	public Time getHoraPlantio() {
 		return horaPlantio;
 	}
+
+	public void setHoraPlantio(Time horaPlantio) {
+		this.horaPlantio = horaPlantio;
+	}
+	
+	
 
 
 

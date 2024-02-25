@@ -8,7 +8,7 @@ import com.dev.forest.model.Arvore;
 
 public interface ArvoreRepository extends JpaRepository< Arvore , Long> {
 	
-	public Optional<Arvore> findById(Long id);
+	
 
 
 
