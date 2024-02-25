@@ -22,4 +22,13 @@ export class ArvoreService {
 
    }
 
+   deletarArvore(id:number){
+
+    return this.http.delete(`http://localhost:8080/arvore/${id}`)
+
+
+}
+
+
+   
 }

@@ -3,6 +3,7 @@ import { ForestComponent } from '../icons/forest/forest.component';
 
 import { Arvore } from '../model/Arvore';
 import { ArvoreService } from '../service/arvore.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,12 @@ import { ArvoreService } from '../service/arvore.service';
 })
 export class TimerComponent  implements OnInit{
 
-  constructor( private arvoreService : ArvoreService){
+  constructor( 
+    private arvoreService : ArvoreService,
+    private router: Router,
+    private route: ActivatedRoute
+    
+    ){
 
  
   
@@ -22,6 +28,7 @@ export class TimerComponent  implements OnInit{
 
  
   arvore: Arvore = new Arvore()
+  idPost : number
   public horas: number = 0 ;
   public minutos : number = 0;
   public segundos : number = 0;
@@ -41,6 +48,9 @@ export class TimerComponent  implements OnInit{
   
 
   ngOnInit(): void {
+
+
+    
       
   }
 
@@ -144,15 +154,29 @@ export class TimerComponent  implements OnInit{
     this.animate = false;
     clearInterval(this.timer);
     this.idAudio.nativeElement.load();
+    alert("Deseja editar o tempo de concentracao")
+
+   
   }
 
 
   reset(){
 
+    
+    alert("Deseja cancelar essa  sessão ? sem sim , a arvore será apagada?")
+    alert("Você terá uma arvore murcha")
+
     this.horas = 0;
     this.minutos = 0;
     this.segundos = 0;
     this.stop();
+
+    alert(this.idPost)
+    this.arvoreService.deletarArvore(this.idPost).subscribe(()=>{
+
+      alert("sessão encerrada com sucesso")
+      
+    })
 
 
   }
@@ -177,11 +201,9 @@ export class TimerComponent  implements OnInit{
 
   start(){
 
-   
-     
-
-   
     this.arvore.tempoConcentracao = this.converterParaMinutos()
+
+    
     
     alert( this.arvore.tempoConcentracao)
 
@@ -200,23 +222,18 @@ export class TimerComponent  implements OnInit{
         }, 1000)
       }
 
-
-    
-      
-      
-     
       this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore)=>{
 
-        console.log(resp)
+     
 
-        
-        
-
-        
         this.arvore = resp
 
+    
+        this.idPost = this.arvore.id
+        alert('ID da árvore criada:'+ this.idPost);
+        console.log('ID da árvore criada:' , this.idPost)
         console.log(this.arvore);
-        
+      
         this.arvore = new Arvore()
        
       })
