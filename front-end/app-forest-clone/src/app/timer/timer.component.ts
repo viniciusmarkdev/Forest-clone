@@ -1,6 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ForestComponent } from '../icons/forest/forest.component';
 
+import { Arvore } from '../model/Arvore';
+import { ArvoreService } from '../service/arvore.service';
+
+
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
@@ -8,6 +12,16 @@ import { ForestComponent } from '../icons/forest/forest.component';
 })
 export class TimerComponent  implements OnInit{
 
+  constructor( private arvoreService : ArvoreService){
+
+ 
+  
+
+
+  }
+
+ 
+  arvore: Arvore = new Arvore()
   public horas: number = 0 ;
   public minutos : number = 0;
   public segundos : number = 0;
@@ -17,22 +31,36 @@ export class TimerComponent  implements OnInit{
   public show: boolean = true;
   public disabled:boolean = false;
   public animate: boolean = false;
+  
 
   @ViewChild("idAudio") idAudio!: ElementRef;
 
-  constructor(){
 
+  
 
-  }
+  
 
   ngOnInit(): void {
       
   }
 
+  convertToMilliseconds(): number {
+
+    return ((this.horas * 60 * 60) + (this.minutos * 60) + this.segundos) * 1000;
+
+  }
+  
+
   increment(type: 'H' | 'M' | 'S') {
 
     if(type==='H'){
+    
 
+       //Quando return; é chamado dentro de uma função ou método, 
+       //isso indica que a execução da função ou método será encerrada im
+       // ediatamente e o controle será retornado para o chamador. Em outras palavras,
+       //  a função ou método será interrompido nesse ponto e qualquer código após a 
+       // instrução return não será executado.
       if(this.horas>=99)
       return ;
         
@@ -66,7 +94,8 @@ export class TimerComponent  implements OnInit{
     }
     else if(type==='M'){
 
-      if(this.minutos<=0)return;
+      if(this.minutos<=0)
+      return;
       this.minutos-=1;
     }
     else{
@@ -91,6 +120,7 @@ export class TimerComponent  implements OnInit{
     this.horas = this.date.getHours();
     this.minutos = this.date.getMinutes()
     this.segundos = this.date.getSeconds();
+    
     if(this.date.getHours()===0   && 
        this.date.getMinutes()===0 && 
        this.date.getSeconds()==0) {
@@ -127,8 +157,33 @@ export class TimerComponent  implements OnInit{
 
   }
 
+  
+  converterParaMinutos = (): string => {
+    // Converter cada unidade de tempo para minutos
+    const minutosHoras = this.horas * 60;
+    const minutosMinutos = this.minutos;
+    const minutosSegundos = this.segundos / 60;
+  
+    // Somar todas as unidades de tempo convertidas
+    const totalMinutos = minutosHoras + minutosMinutos + minutosSegundos;
+  
+    // Arredondar o resultado para o número inteiro mais próximo e converter para string
+    return Math.round(totalMinutos).toString();
+
+  };
+  
+
+  
 
   start(){
+
+   
+     
+
+   
+    this.arvore.tempoConcentracao = this.converterParaMinutos()
+    
+    alert( this.arvore.tempoConcentracao)
 
     if(this.horas>0|| this.minutos>0 || this.segundos>0){
 
@@ -144,8 +199,34 @@ export class TimerComponent  implements OnInit{
 
         }, 1000)
       }
+
+
+    
+      
+      
+     
+      this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore)=>{
+
+        console.log(resp)
+
+        
+        
+
+        
+        this.arvore = resp
+
+        console.log(this.arvore);
+        
+        this.arvore = new Arvore()
+       
+      })
+
+      
+
     }
 
   }
 
 }
+
+
