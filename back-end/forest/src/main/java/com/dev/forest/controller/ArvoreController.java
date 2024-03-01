@@ -1,16 +1,19 @@
 package com.dev.forest.controller;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +49,9 @@ public class ArvoreController {
 	@PostMapping("/plantar")
 	public ResponseEntity<Arvore> create(@Valid @RequestBody Arvore arvore){
 		
+		   arvore.setId(0);
+		   arvore.setHoraPlantio(new java.sql.Time(System.currentTimeMillis()));
+		
 		 arvoreService.calcularHoraTermino(arvore);
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(arvoreRepository.save(arvore));
@@ -56,43 +62,63 @@ public class ArvoreController {
 		
 }
 	
-	
-		@PutMapping("/{id}")
-		public ResponseEntity<Arvore> atualizarSessao(@PathVariable Long id , @RequestBody Arvore arvore1){
-			
-			 Optional<Arvore> arvore  = arvoreRepository.findById(id);
-			 arvore1.setId(id);
-			 arvore1.setHoraPlantio(new java.sql.Time(System.currentTimeMillis()));
-			
-			if(arvore.isPresent()) {
-				
-				arvoreService.calcularHoraTermino(arvore1);
-				
-				return ResponseEntity.status(HttpStatus.OK).body(arvoreRepository.save(arvore1));
-			}
-			else {
-				
-				return ResponseEntity.notFound().build();
-				
-			}
+	@PutMapping("/{id}")
+
+	public ResponseEntity<Arvore> atualizarSessao(@PathVariable Long id , @RequestBody Arvore arvore1){
+
+		
+
+	    Optional<Arvore> arvore  = arvoreRepository.findById(id);
 		 
+		Arvore arvore2 = arvore.get();
+		
+        arvore1.setHoraPlantio(arvore2.getHoraPlantio());
+		arvore1.setHoraTermino(new java.sql.Time(System.currentTimeMillis()));
+
+		LocalTime horaInicio = arvore2.getHoraPlantio().toLocalTime();
+
+		LocalTime horaFim = arvore1.getHoraTermino().toLocalTime();
+		
+		long diferencaEmMinutos = horaInicio.until(horaFim, ChronoUnit.MINUTES);
+		
+		
+		String diferencaEmMinutosString = String.valueOf(diferencaEmMinutos);
+	
+		
+         arvore1.setTempoConcentracao(diferencaEmMinutosString);
+		 arvore1.setId(id);
+		 
+	
+
+		if(arvore.isPresent()) {
+
+			
+	          
+			arvoreService.calcularHoraTermino(arvore1);
+
+			
+
+			return ResponseEntity.status(HttpStatus.OK).body(arvoreRepository.save(arvore1));
+
 		}
-	
-	@DeleteMapping("/{id}")
-	public  ResponseEntity<?> deletePostagem(@PathVariable Long id){
-		
-		return arvoreRepository.findById(id)
-				.map(resposta->{
-				         arvoreRepository.deleteById(id);
-				         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-				})
-				.orElse(ResponseEntity.notFound().build());
-		
-		
+
+		else {
+
+			
+
+			return ResponseEntity.notFound().build();
+
+			
+
+		}
+
+	 
+
 	}
-	
-	
-
-
-
+  
 }
+	
+
+
+
+

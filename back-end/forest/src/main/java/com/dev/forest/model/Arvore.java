@@ -2,6 +2,7 @@ package com.dev.forest.model;
 
 import java.sql.Time;
 import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -34,10 +37,20 @@ public class Arvore {
 	@Column(name = "tempo_de_concetracao_min")
 	private String tempoConcentracao;
 
-	@Column(name = "hora_de_termino")
+	@Column(name = "hora_de_termino" , columnDefinition = "TIME")
 	private Time horaTermino;
+	
+	private  boolean estaMurcha = false;
+	
+	private int coins;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data = new java.sql.Date(System.currentTimeMillis()); // Date Timestamp()
+
 
 	
+	
+
 	
 
 	
@@ -82,9 +95,9 @@ public class Arvore {
 		this.horaTermino = horaTermino;
 	}
 
-	public String getTempoConcentracao() {
-		return tempoConcentracao;
-	}
+	
+
+
 
 
 	public Time getHoraPlantio() {
@@ -94,6 +107,25 @@ public class Arvore {
 	public void setHoraPlantio(Time horaPlantio) {
 		this.horaPlantio = horaPlantio;
 	}
+
+	public boolean isEstaMurcha() {
+		return estaMurcha;
+	}
+
+	public void setEstaMurcha(boolean estaMurcha) {
+		this.estaMurcha = estaMurcha;
+	}
+
+	public String getTempoConcentracao() {
+		return tempoConcentracao;
+	}
+
+	public void setTempoConcentracao(String tempoConcentracao) {
+		this.tempoConcentracao = tempoConcentracao;
+	}
+
+
+	
 	
 	
 

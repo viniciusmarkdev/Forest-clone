@@ -6,6 +6,11 @@ public interface ArvoreService  {
 	
 	
 	    void calcularHoraTermino(Arvore arvore);
+
+	    
+	    
+    
+	    
 	
 
 }
