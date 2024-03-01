@@ -154,8 +154,7 @@ export class TimerComponent  implements OnInit{
     this.animate = false;
     clearInterval(this.timer);
     this.idAudio.nativeElement.load();
-    alert("Deseja editar o tempo de concentracao")
-
+  
    
   }
 
@@ -172,10 +171,18 @@ export class TimerComponent  implements OnInit{
     this.stop();
 
     alert(this.idPost)
-    this.arvoreService.deletarArvore(this.idPost).subscribe(()=>{
 
-      alert("sessão encerrada com sucesso")
+ 
+    this.arvore.estaMurcha = true
+  
+    this.arvoreService.encerrarSessão(this.idPost , this.arvore).subscribe((resp: Arvore)=>{
       
+     
+      
+      this.arvore = resp
+
+      console.log(resp)
+
     })
 
 
@@ -222,9 +229,11 @@ export class TimerComponent  implements OnInit{
         }, 1000)
       }
 
+
+
       this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore)=>{
 
-     
+        this.arvore.estaMurcha = false
 
         this.arvore = resp
 

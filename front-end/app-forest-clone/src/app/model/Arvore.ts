@@ -6,9 +6,11 @@ export class Arvore{
     public marcador : string
     public descricao : string
     public running : boolean
-    public horaPlantio : Time
-    public tempoConcentracao : string
-    public horaTermino : Time
+    public horaPlantio : Date
+    public tempoConcentracao: string
+    public horaTermino : Date
+    public estaMurcha : boolean = false
+
 
 
 }

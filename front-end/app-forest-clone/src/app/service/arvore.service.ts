@@ -22,12 +22,15 @@ export class ArvoreService {
 
    }
 
-   deletarArvore(id:number){
+   encerrarSessão(id : number , arvore : Arvore):Observable<Arvore>{
 
-    return this.http.delete(`http://localhost:8080/arvore/${id}`)
+    return this.http.put<Arvore>(`http://localhost:8080/arvore/${id}`, arvore )
 
 
 }
+
+
+
 
 
    

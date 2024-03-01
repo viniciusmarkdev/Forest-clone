@@ -1,148 +1,259 @@
-:root {
-    --primary-color: rgb(140, 201, 20);
-    --background-color: rgb(81, 163, 135);
-     --color-white: rgb(255, 255, 255)
-  }
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
 
-  *{
+code {
+    font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace
+}
 
-    margin:0;
-    padding: 0;
-  }
+.App {
+    text-align: center
+}
 
-  body{
+.App-logo {
+    height: 40vmin;
+    pointer-events: none
+}
 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-     height: 100vh;
-     background: var(--background-color);
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-
-  }
-
-  
-  /*hide audio*/
-
-  .dnone{
-
-    display: none;
-
-  }
-
-  .content{
-
-
-    .content-timer{
-
-        display: flex;
-        justify-content: center;
-        padding-top: 5rem;
-
-        .content-h,
-        .content-m,
-        .content-s{
-
-            width: 16rem;
-            height: 10rem;
-
-            .time{
-
-                font-size: 130px;
-                color: var(--color-white);
-                font-weight: 300;
-                text-align: center;
-
-                span{
-
-                    font-size: 3.5rem;
-                    font-weight: 500;
-                }
-            }
-        }
-
-        .content-btn{
-            text-align: center;
-            
-            button{
-                font-size: 2.8rem;
-                width: 3rem;
-                margin:0 10px;
-                border-radius: 10px;
-                border: none;
-                outline : inherit;
-                color : var(--primary-color)
-
-            }
-
-            :hover{
-
-                background-color: var(--background-color) ;
-                transition: 0.5s;
-                transform: scale(0.8);
-                cursor:pointer
-            }
-        }
-
+@media (prefers-reduced-motion:no-preference) {
+    .App-logo {
+        -webkit-animation: App-logo-spin 20s linear infinite;
+        animation: App-logo-spin 20s linear infinite
     }
-    
-    .content-btn-action{
+}
 
-        display: flex;
-        justify-content: center;
-        margin-top: 5rem;
-        padding-bottom: 3rem;
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: #fff
+}
 
-        button{
+.App-link {
+    color: #61dafb
+}
 
-            font-size: 5rem;
-            width: 6.5rem;
-            margin: 0 30px;
-            border-radius: 20px;
-            border : none;
-            outline: inherit;
-            color: var(--primary-color);
-            background-color: var(--background-color);
-
-            &:hover{
-
-                background-color: var( --color-white);
-                transition: 0.6s;
-                transform: scale(0.8);
-                cursor:pointer
-            }
-
-            &:disabled{
-
-                opacity: 0.3;
-            }
-        }
-
-    }
-  }
-
-  .move{
-
-    animation: move_time 1.3s infinite;
-
-  }
-
-  @keyframes move_time {
-
-    20%,
-    50%,
-    80%{
-        transform: translateY(0px);
+@-webkit-keyframes App-logo-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
     }
 
-    30%{
-        transform: translateY(-45px);
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes App-logo-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
     }
 
-    60%{
-        transform: translateY(-25px);
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
     }
-    
-  }
+}
+
+.home__wrap {
+    background-color: #51a387;
+    width: 100vw;
+    height: 100%;
+    min-height: 100vh;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+.home__wrap,.home__wrap .home__content {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.home__wrap .home__content {
+    height: 50vh;
+    color: #fff;
+    font-family: Helvetica;
+    font-weight: lighter;
+    -webkit-justify-content: space-between;
+    justify-content: space-between
+}
+
+.home__wrap .home__content .timer__wrap {
+    height: 90%;
+    -webkit-justify-content: space-evenly;
+    justify-content: space-evenly
+}
+
+.home__wrap .home__content .timer__wrap,.home__wrap .home__content .timer__wrap .timer__visual {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.home__wrap .home__content .timer__wrap .timer__visual {
+    background-color: #e4e4a3;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    justify-self: flex-start;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end
+}
+
+.home__wrap .home__content .timer__wrap .timer__visual img {
+    width: 130px;
+    justify-self: center;
+    margin-bottom: 10px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none
+}
+
+.timer__numbers
+
+.home__wrap .home__content .timer__wrap .timer__numbers {
+    width: 400px;
+    font-family: Helvetica;
+    font-size: 40pt;
+    font-weight: lighter;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.home__wrap .home__content .timer__wrap .timer__numbers .add-remove__time {
+    margin-left: 20px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.home__wrap .home__content .timer__wrap .timer__numbers .add-remove__time svg {
+    width: 20px;
+    height: 20px;
+    cursor: pointer
+}
+
+.home__wrap .home__content .timer__wrap .start__button {
+    border-radius: 5px;
+    font-size: 11pt;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #e4e4a3;
+    color: #000;
+    font-weight: 400;
+    border: none;
+    padding: 5px 10px
+}
+
+.home__wrap .home__content .timer__wrap .start__button:disabled {
+    color: grey;
+    cursor: not-allowed
+}
+
+.home__wrap .home__content .timer__wrap .give-up__button {
+    border: 1px solid #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 11pt;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.modal__wrap {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.5);
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center
+}
+
+.modal__wrap,.modal__wrap .modal__inner {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.modal__wrap .modal__inner {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    font-family: Helvetica
+}
+
+.modal__wrap .modal__inner button {
+    border: none;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff
+}
+
+.modal__wrap .modal__inner button#gu {
+    background-color: red
+}
+
+.modal__wrap .modal__inner button#kg {
+    background-color: #51a387
+}
+
+.modal__wrap .modal__inner button:hover {
+    box-shadow: 5px 5px 29px 3px #a3a3a3
+}
+
+.modal__hide {
+    display: none
+}
+
+.footer__wrap {
+    width: 100vw;
+    background-color: transparent;
+    color: #fff;
+    font-family: Helvetica;
+    position: absolute;
+    bottom: 0
+}
+
+/*# sourceMappingURL=main.c2d4a602.chunk.css.map */
