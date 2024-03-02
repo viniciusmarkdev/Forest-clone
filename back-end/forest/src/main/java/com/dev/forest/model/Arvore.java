@@ -1,7 +1,7 @@
 package com.dev.forest.model;
 
 import java.sql.Time;
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tree")
@@ -45,8 +49,36 @@ public class Arvore {
 	private int coins;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date data = new java.sql.Date(System.currentTimeMillis()); // Date Timestamp()
+	private Date data = new java.sql.Date(System.currentTimeMillis());
 
+    @Transient
+    @JsonIgnore
+    private int diaCriacao;
+
+	@Transient
+    @JsonIgnore
+    private int mesCriacao;
+    
+    
+    
+    public int getDiaCriacao() {
+        return LocalDate.parse(data.toString()).getDayOfMonth();
+    }
+
+    public void setDiaCriacao(int diaCriacao) {
+        this.diaCriacao = diaCriacao;
+    }
+
+    public int getMesCriacao() {
+        return LocalDate.parse(data.toString()).getMonthValue();
+    }
+
+    public void setMesCriacao(int mesCriacao) {
+        this.mesCriacao = mesCriacao;
+    }
+
+	
+	
 
 	
 	

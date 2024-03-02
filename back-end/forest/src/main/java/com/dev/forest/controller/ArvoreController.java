@@ -51,6 +51,10 @@ public class ArvoreController {
 		
 		   arvore.setId(0);
 		   arvore.setHoraPlantio(new java.sql.Time(System.currentTimeMillis()));
+		   arvore.setEstaMurcha(false);
+		   arvore.setDiaCriacao(arvore.getDiaCriacao());
+		   arvore.setMesCriacao(arvore.getMesCriacao());
+		
 		
 		 arvoreService.calcularHoraTermino(arvore);
 		
@@ -87,6 +91,9 @@ public class ArvoreController {
 		
          arvore1.setTempoConcentracao(diferencaEmMinutosString);
 		 arvore1.setId(id);
+	     arvore1.setEstaMurcha(true);
+	     arvore1.setDiaCriacao(arvore1.getDiaCriacao());
+	     arvore1.setMesCriacao(arvore1.getMesCriacao());
 		 
 	
 
