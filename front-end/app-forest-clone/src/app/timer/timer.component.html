@@ -1,30 +1,49 @@
-<div id="root">
-    <div class="home__wrap">
-        <div class="modal__hide">
-            <div class="modal__inner">Are you sure you want to give up?<br>Keep focusing!<br><span><button
-                        id="gu">Give up</button><button id="kg">Keep going</button></span></div>
-        </div>
-        <div class="home__content"><i> Get back to work!</i>
-            <div class="timer__wrap">
-                <div class="timer__visual"><img src="../../assets/tree.png" alt="tree"></div>
-                <div class="timer__numbers">00:00<div class="add-remove__time"><svg stroke="currentColor"
-                            fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M3,19h18c0.372,0,0.713-0.207,0.886-0.536c0.173-0.329,0.148-0.727-0.063-1.033l-9-13c-0.373-0.539-1.271-0.539-1.645,0 l-9,13c-0.212,0.306-0.236,0.704-0.063,1.033C2.287,18.793,2.628,19,3,19z M12,6.757L19.092,17H4.908L12,6.757z">
-                            </path>
-                        </svg><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
-                            height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M21.886,5.536C21.713,5.207,21.372,5,21,5H3C2.628,5,2.287,5.207,2.114,5.536C1.941,5.865,1.966,6.263,2.178,6.569l9,13 C11.364,19.839,11.672,20,12,20s0.636-0.161,0.822-0.431l9-13C22.034,6.263,22.059,5.865,21.886,5.536z M12,17.243L4.908,7h14.184 L12,17.243z">
-                            </path>
-                        </svg></div>
-                </div><button disabled="" class="start__button">Start</button>
-            </div>
-        </div>
-    </div>
-  
+<div class="content" [class.move]="animate">
+    <div id="root">
+        <div class="home__wrap">
+            <div class="home__content"><i> Get back to work!</i>
+                <div class="timer__wrap">
+                    <div class="timer__visual"><img src="../../assets/tree.png" alt="tree"></div>
+                </div>
+                <div class="content-timer">
+                    <div class="content-h">
+                        <div class="time">{{horas| number:'2.0'}}<span>h</span></div>
+                        <div class="content-btn" *ngIf="show">
+                            <button (click)="increment('H')">+</button>
+                            <button (click)="decrement('H')">-</button>
+                        </div>
+                    </div>
+                    <div class="content-m">
+                        <div class="time">{{minutos| number:'2.0'}}<span>m</span></div>
+                        <div class="content-btn" *ngIf="show">
+                            <button (click)="increment('M')">+</button>
+                            <button (click)="decrement('M')">-</button>
+                        </div>
+                    </div>
+                    <div class="content-s">
+                        <div class="time">{{segundos | number:'2.0'}}<span>s</span></div>
+                        <div class="content-btn" *ngIf="show">
+                            <button (click)="increment('S')">+</button>
+                            <button (click)="decrement('S')">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-btn-action">
+                    <button type="button" (click)="start()" [disabled]="disabled">&#9658;</button>
+                    <button type="button" (click)="stop()">&#9724;</button>
+                    <button type="button" (click)="reset()">&#8635;</button>
+                </div>
 
-<script src="/static/js/2.8bb05257.chunk.js"></script>
-<script src="/static/js/main.aa1a4739.chunk.js"></script>
-<div id="forest-ext-shadow-host"></div>
+                <audio #idAudio controls class="dnone">
+                    <source type="audio/wav" src="/app-forest-clone/src/assets/soft-rain-ambient-111154.mp3">
+                </audio>    
+            </div>
+
+            
+        </div>
+
+       
+    </div>
+
+    
+</div>

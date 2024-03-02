@@ -5,6 +5,13 @@ body {
     -moz-osx-font-smoothing: grayscale
 }
 
+:root {
+    --primary-color: rgb(140, 201, 20);
+    --background-color: rgb(81, 163, 135);
+     --color-white: rgb(255, 255, 255)
+  }
+
+
 code {
     font-family: source-code-pro,Menlo,Monaco,Consolas,"Courier New",monospace
 }
@@ -111,13 +118,18 @@ code {
 }
 
 .home__wrap .home__content .timer__wrap .timer__visual {
+   
+
     background-color: #e4e4a3;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     justify-self: flex-start;
     -webkit-justify-content: flex-end;
-    justify-content: flex-end
+    justify-content: flex-end;
+    margin-top: 30px;
+    
+    
 }
 
 .home__wrap .home__content .timer__wrap .timer__visual img {
@@ -256,4 +268,101 @@ code {
     bottom: 0
 }
 
-/*# sourceMappingURL=main.c2d4a602.chunk.css.map */
+
+
+
+.content{
+
+
+
+    .content-timer{
+
+        display: flex;
+        justify-content: center;
+     
+        margin-bottom: -20px;
+
+        .content-h,
+        .content-m,
+        .content-s{
+
+            width: 14rem;
+            height: 10rem;
+            
+
+            .time{
+
+
+                font-size: 50px;
+                color: var(--color-white);
+                font-weight: 300;
+                text-align: center;
+                margin-top: 90px;
+
+                span{
+
+                    font-size: 3.5rem;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        .content-btn{
+            text-align: center;
+            
+            button{
+                font-size: 2rem;
+                width: 2rem;
+                margin:0 10px;
+                border-radius: 10px;
+                border: none;
+                outline : inherit;
+                color : var(--primary-color)
+
+            }
+
+            :hover{
+
+                background-color: var(--background-color) ;
+                transition: 0.5s;
+                transform: scale(0.8);
+                cursor:pointer
+            }
+        }
+
+    }
+    
+    .content-btn-action{
+
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+        padding-bottom: 3rem;
+
+        button{
+
+            font-size: 3rem;
+            width: 3rem;
+            margin: 0 30px;
+            border-radius: 20px;
+            border : none;
+            outline: inherit;
+            color: var(--primary-color);
+            background-color: var(--background-color);
+
+            &:hover{
+
+                background-color: var( --color-white);
+                transition: 0.6s;
+                transform: scale(0.8);
+                cursor:pointer
+            }
+
+            &:disabled{
+
+                opacity: 0.3;
+            }
+        }
+
+    }
+  }
