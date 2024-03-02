@@ -39,6 +39,8 @@ export class TimerComponent  implements OnInit{
   public disabled:boolean = false;
   public animate: boolean = false;
   
+  public  imagemSrc = '../../assets/tree.png'; // Caminho da imagem padrão
+  public texto = 'Get back to work!'
 
   @ViewChild("idAudio") idAudio!: ElementRef;
 
@@ -185,6 +187,9 @@ export class TimerComponent  implements OnInit{
 
     })
 
+    this.imagemSrc = '../../assets/tree_death.png'; // Caminho da nova imagem
+    this.texto = 'You tree died.!'
+
 
   }
 
@@ -207,6 +212,10 @@ export class TimerComponent  implements OnInit{
   
 
   start(){
+
+
+    this.texto = 'Get back to work!'
+    this.imagemSrc =  '../../assets/tree.png'
 
     this.arvore.tempoConcentracao = this.converterParaMinutos()
 

@@ -1,9 +1,9 @@
 <div class="content" [class.move]="animate">
     <div id="root">
         <div class="home__wrap">
-            <div class="home__content"><i> Get back to work!</i>
+            <div class="home__content"><i>{{texto}}</i>
                 <div class="timer__wrap">
-                    <div class="timer__visual"><img src="../../assets/tree.png" alt="tree"></div>
+                    <div class="timer__visual"><img [src]="imagemSrc" alt="tree"></div>
                 </div>
                 <div class="content-timer">
                     <div class="content-h">
