@@ -1,0 +1,84 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fafafa;
+  height: 100vh;
+}
+ 
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.card {
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 30px;
+  margin: 20px;
+  width: 400px;
+  transition: all 0.3s ease-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+ 
+.card p {
+  color: #a3a5ae;
+  font-size: 16px;
+}
+ 
+.image {
+  float: right;
+  max-width: 64px;
+  max-height: 64px;
+}
+
+.green {
+  border-left: 5px solid  rgb(81, 163, 135);
+  height: 400px;
+ margin-top: -40px;
+
+}
+
+
+.circle-baixo {
+  width: 40px; /* Defina a largura do círculo */
+  height: 40px; /* Defina a altura do círculo */
+  background-color: rgb(81, 163, 135); /* Cor de fundo do círculo */
+  border-radius: 50%; /* Faça as bordas do círculo arredondadas */
+
+  margin-left: 500px;
+  margin-top: -30px;
+
+}
+
+
+
+.circle-alto {
+  width: 40px; /* Defina a largura do círculo */
+  height: 40px; /* Defina a altura do círculo */
+  background-color:  rgb(81, 163, 135); /* Cor de fundo do círculo */
+  border-radius: 50%; /* Faça as bordas do círculo arredondadas */
+  display: flex;
+  align-items: center;
+  margin-left: 500px;
+  
+
+}
+
+
+
+.cedro{
+
+  margin-left: 45px;
+ 
+}
+
+.hora{
+
+  margin-top: 30px;
+}
+

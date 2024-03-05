@@ -1,4 +1,4 @@
-import { Time } from "@angular/common"
+
 
 export class Arvore{
 
@@ -10,6 +10,9 @@ export class Arvore{
     public tempoConcentracao: string
     public horaTermino : Date
     public estaMurcha : boolean = false
+    public data : Date
+    
+
 
 
 

@@ -16,6 +16,11 @@ export class ArvoreService {
    }
 
 
+   getAllTrees():Observable<Arvore[]>{
+
+    return this.http.get<Arvore[]>('http://localhost:8080/arvore')
+   }
+
    plantar(arvore : Arvore):Observable<Arvore>{
 
     return this.http.post<Arvore>('http://localhost:8080/arvore/plantar' , arvore)
