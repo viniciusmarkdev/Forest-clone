@@ -1,0 +1,12 @@
+<body>
+    <div class="row" *ngFor = 'let atributos of listaArvores'>
+      <div class="card green">
+        <h2>Monetização</h2>
+        <p>Configure a monetização</p>
+        <p>às {{atributos.data | date : 'HH:mm'}}</p>
+        <img class="image" src="money.png" alt="money" />
+      </div>
+ 
+     
+    </div>
+  </body>
