@@ -10,8 +10,8 @@ import { Arvore } from '../model/Arvore';
 export class TimelineComponent  implements OnInit {
 
   postagem:Arvore= new Arvore()
-
- 
+  key = 'data'
+  reverse = true
 
   listaArvores: Arvore[]
 
@@ -35,6 +35,10 @@ export class TimelineComponent  implements OnInit {
     this.arvoreService.getAllTrees().subscribe((resp:Arvore[])=>{
 
       this.listaArvores =  resp
+
+      this.listaArvores = resp.sort((a, b) => {
+        return new Date(b.data).getTime() - new Date(a.data).getTime();
+      });
     })
 
 

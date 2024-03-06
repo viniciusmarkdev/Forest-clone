@@ -1,6 +1,16 @@
+
+
+*{
+
+  background-color: rgb(35, 88, 70);
+  
+}
+
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #fafafa;
+  font-family: "Poppins", sans-serif;  
+  
+  
+
 }
  
 .row {
@@ -10,13 +20,19 @@ body {
 }
 
 .card {
-  border-radius: 5px;
-  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+
+  background-color: rgb(81, 163, 135);
+  border-radius: 10px;
   padding: 30px;
   margin: 20px;
-  width: 400px;
-  transition: all 0.3s ease-out;
+  height: 230px;
+  width: 450px;
+ 
+  
+  
+ 
 }
+
 
 
 .card:hover {
@@ -36,5 +52,53 @@ body {
 }
 
 .green {
-  border-left: 3px solid #3bb54a;
+  border-left: 6px solid rgb(81, 163, 135);
+  height: 500px;
 }
+
+
+.texto{
+
+  background-color: rgb(81, 163, 135);;
+}
+
+
+.circle{
+  
+
+margin-left: -17px;
+
+  height: 30px;
+  width: 30px;
+  border-radius: 100px;
+  background-color: #d9d955;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img{
+
+  background-color: #d9d955;
+}
+
+
+.circle-baixo{
+
+
+  height: 30px;
+  width: 30px;
+  border-radius: 100px;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img{
+
+    background-color: black
+  }
+}
+
+
+
