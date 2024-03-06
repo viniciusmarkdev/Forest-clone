@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.dev.forest.model.Arvore;
 import com.dev.forest.repository.ArvoreRepository;
 import com.dev.forest.service.ArvoreService;
+import com.dev.forest.util.Mes;
 
 @Controller
 @RequestMapping("/arvore")
@@ -54,7 +55,7 @@ public class ArvoreController {
 		   arvore.setEstaMurcha(false);
 		   arvore.setDiaCriacao(arvore.getDiaCriacao());
 		   arvore.setMesCriacao(arvore.getMesCriacao());
-		
+		   arvore.setNomeDoMes(Mes.getNomeDoMes(arvore.getMesCriacao()));
 		
 		 arvoreService.calcularHoraTermino(arvore);
 		
@@ -94,6 +95,7 @@ public class ArvoreController {
 	     arvore1.setEstaMurcha(true);
 	     arvore1.setDiaCriacao(arvore1.getDiaCriacao());
 	     arvore1.setMesCriacao(arvore1.getMesCriacao());
+	     arvore1.setNomeDoMes(Mes.getNomeDoMes(arvore1.getMesCriacao()));
 		 
 	
 

@@ -48,6 +48,18 @@ public class Arvore {
 	
 	private int coins;
 	
+	private String nomeDoMes;
+	
+	
+	
+	public String getNomeDoMes() {
+		return nomeDoMes;
+	}
+
+	public void setNomeDoMes(String nomeDoMes) {
+		this.nomeDoMes = nomeDoMes;
+	}
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 
