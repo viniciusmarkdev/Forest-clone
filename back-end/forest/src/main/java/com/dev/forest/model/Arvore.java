@@ -52,6 +52,9 @@ public class Arvore {
 	
 	
 	
+	
+	
+	
 	public String getNomeDoMes() {
 		return nomeDoMes;
 	}
@@ -166,6 +169,14 @@ public class Arvore {
 
 	public void setTempoConcentracao(String tempoConcentracao) {
 		this.tempoConcentracao = tempoConcentracao;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 
