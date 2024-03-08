@@ -1,0 +1,47 @@
+<div class="content" [class.move]="animate">
+    <div id="root">
+        <div class="home__wrap">
+            <div class="home__content"><i>{{texto}}</i>
+                <div class="timer__wrap">
+                    <div class="timer__visual"><img [src]="imagemSrc" alt="tree"></div>
+                </div>
+                <div class="content-timer">
+                    <div class="content-h">
+                        <div class="time">{{horas | number:'2.0'}}<span>h</span></div>
+                        <div class="content-btn" *ngIf="show">
+                            <button (click)="increment('H')">+</button>
+                            <button (click)="decrement('H')">-</button>
+                        </div>
+                    </div>
+                    <div class="content-m">
+                        <div class="time">{{minutos| number:'2.0'}}<span>m</span></div>
+                        <div class="content-btn" *ngIf="show">
+                            <button (click)="increment('M')">+</button>
+                            <button (click)="decrement('M')">-</button>
+                        </div>
+                    </div>
+                    <div class="content-s">
+                        <div class="time">{{segundos | number:'2.0'}}<span>s</span></div>
+                        <div class="content-btn" *ngIf="show">
+                            <button (click)="increment('S')">+</button>
+                            <button (click)="decrement('S')">-</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-btn-action">
+                    <button type="button" (click)="start()" [disabled]="disabled">&#9658;</button>
+                    <button type="button" (click)="stop()">&#9724;</button>
+                    <button type="button" (click)="reset()">&#8635;</button>
+                </div>
+
+             
+            </div>
+
+            
+        </div>
+
+       
+    </div>
+
+    
+</div>
