@@ -1,52 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=,initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../../app/timeline/timeline.component.css"  >
-</head>
-<body>
 
-    <div  *ngFor="let atributos of listaArvores">
-        
-    <div class="row">
+<div class="aline">
 
-        
+   
+      
+<div class="timeline" *ngFor="let atributos of listaArvores">
+
+  
+    <div class="container right">
+
        
-    
-
-        <div class="green">
-
-
-                <div class="circle">
         
-                    <img src="../../assets/tree.png" height="20px" width="20px" > 
+      <div class="content">
 
-                </div>
+        
 
-               
+     
+        <div class="etiqueta">
+
         </div>
-          <div class="card">
-      
-              <h2 class="texto">Monetização</h2>
-              <p class="texto">Configure a monetização</p>
-              <h2 class="texto">{{atributos.data | date : 'HH:mm'}}</h2>
-              
-      
-              <div class="etiqueta"></div>
-  
-            </div>
+        <div class="data">
+            {{atributos.data | date : 'HH:mm'}}
+        </div> 
+
        
 
-            
-        
-  
-
+       
       </div>
-
       
-    
+    </div>
+    <div class="container right">
+    </div>
+  </div>
+
 </div>
-</body>
-</html>

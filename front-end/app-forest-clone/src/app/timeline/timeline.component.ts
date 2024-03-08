@@ -10,8 +10,7 @@ import { Arvore } from '../model/Arvore';
 export class TimelineComponent  implements OnInit {
 
   postagem:Arvore= new Arvore()
-  key = 'data'
-  reverse = true
+  
 
   listaArvores: Arvore[]
 
