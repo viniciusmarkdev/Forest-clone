@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tree")
@@ -50,11 +52,42 @@ public class Arvore {
 	
 	private String nomeDoMes;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("arvore")
+	private Usuario usuario;
 	
 	
 	
 	
 	
+	public Arvore(long id, String marcador, String descricao, boolean running, Time horaPlantio,
+			@NotNull String tempoConcentracao, Time horaTermino, boolean estaMurcha, int coins, String nomeDoMes,
+			Usuario usuario, Date data, int diaCriacao, int mesCriacao) {
+		super();
+		this.id = id;
+		this.marcador = marcador;
+		this.descricao = descricao;
+		this.running = running;
+		this.horaPlantio = horaPlantio;
+		this.tempoConcentracao = tempoConcentracao;
+		this.horaTermino = horaTermino;
+		this.estaMurcha = estaMurcha;
+		this.coins = coins;
+		this.nomeDoMes = nomeDoMes;
+		this.usuario = usuario;
+		this.data = data;
+		this.diaCriacao = diaCriacao;
+		this.mesCriacao = mesCriacao;
+	}
+	
+	
+
+	public Arvore() {
+		super();
+	}
+
+
+
 	public String getNomeDoMes() {
 		return nomeDoMes;
 	}
