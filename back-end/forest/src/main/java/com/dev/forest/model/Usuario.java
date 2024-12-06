@@ -62,7 +62,7 @@ public class Usuario {
 		this.id = id;
 		this.nome = nome;
 		this.senha = senha;
-		this.email = email;
+		this.email= email;
 		this.foto = foto;
 		this.tipo = tipo;
 		this.arvore = arvore;
@@ -100,13 +100,22 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	
+
+
+
+
 	public String getEmail() {
 		return email;
 	}
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 	public String getFoto() {
 		return foto;
