@@ -19,18 +19,22 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(userDetailsService);
+		/**
+		 *  O objeto auth registra e cria uma nova instância do objeto userDetailsService
+		 *  da interface UserDetailsService implementada na Classe UserDetailsServiceImpl
+		 *  para recuperar os dados dos usuários gravados no Banco de dados.
+		 */
 		
-		
-		auth.inMemoryAuthentication()
-		    .withUser("root")
-		    .password(passwordEncoder().encode("root"))
-		    .authorities("ROLE_USER");
-		
+		 auth.userDetailsService(userDetailsService);
+
+		 auth.inMemoryAuthentication()
+			.withUser("root")
+			.password(passwordEncoder().encode("root"))
+			.authorities("ROLE_USER");
+
 	}
 	
 	@Bean
@@ -43,8 +47,8 @@ public class BasicSecurityConfig  extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests()
-		.antMatchers("usuarios/logar").permitAll()
-		.antMatchers("usuario/cadastrar").permitAll()
+		.antMatchers("/usuarios/logar").permitAll()
+		.antMatchers("/usuario/cadastrar").permitAll()	
 		.antMatchers("/arvore").permitAll()
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.anyRequest().authenticated()
