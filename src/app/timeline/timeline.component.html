@@ -1,0 +1,77 @@
+<div class="aline">
+
+
+  <div class="timeline" *ngFor="let atributos of listaArvores">
+
+
+    <div class="container right">
+
+      <div class="dataTermino data">
+        
+        {{atributos.horaTermino}}
+      </div>
+
+
+      <div class="content">
+
+    
+
+        <div  class="tempoConcentracao">{{atributos.tempoConcentracao}} 
+        
+
+          <app-three-dots class="three-dots"></app-three-dots>
+      
+        
+        </div> 
+
+        
+
+
+        
+        <app-clock-svg class="clock"></app-clock-svg>
+    
+
+        
+    
+        <div class="detalhes-hora">
+
+          
+        
+          <div> {{atributos.horaTermino}}-{{atributos.horaPlantio}}</div> 
+         
+        </div>
+
+      
+        
+        
+        <div class="timer__wrap">
+
+          <div class="timer__visual"><img [src]="imagemSrc" alt="tree"></div>
+        </div>
+
+        <div class="etiqueta">
+
+          <app-tag></app-tag> <h1 class="tag">Estudo</h1>
+
+        </div>
+
+ 
+
+        <div class="data">
+          {{atributos.horaPlantio}}
+        </div>
+
+        
+      </div>
+
+    </div>
+    <div class="container right">
+     
+    </div>
+
+
+  </div>
+
+
+
+</div>
