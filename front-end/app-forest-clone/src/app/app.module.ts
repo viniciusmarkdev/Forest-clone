@@ -6,6 +6,7 @@ import { TimerComponent } from './timer/timer.component';
 import { ForestComponent } from './icons/forest/forest.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TimelineComponent } from './timeline/timeline.component';
+import { EntrarComponent } from './entrar/entrar.component';
 
 
 
@@ -17,6 +18,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     TimerComponent,
     ForestComponent,
     TimelineComponent,
+    EntrarComponent,
    
     
 
