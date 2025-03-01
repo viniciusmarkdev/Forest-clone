@@ -1,0 +1,57 @@
+
+
+<div class="aline">
+
+   
+ 
+<div class="timeline" *ngFor="let atributos of listaArvores">
+
+  
+    <div class="container right">
+
+
+      
+  
+            
+            
+
+       
+        
+      <div class="content">
+
+        <div class="relogio">
+          <div class="time-conc"></div>
+          <span>{{atributos.tempoConcentracao}}</span>
+           
+        </div>
+
+     
+      
+        <div class="interval">{{atributos.data | date : 'HH:mm'}}-{{atributos.data | date : 'HH:mm'}}</div>
+       
+        <div class="timer__wrap">
+          <div class="timer__visual"><img src="../../assets/tree.png" alt="tree"></div>
+      </div>
+
+
+        
+
+     
+        <div class="etiqueta">
+
+        </div>
+        <div class="data">
+            {{atributos.data | date : 'HH:mm'}}
+        </div> 
+
+       
+
+       
+      </div>
+      
+    </div>
+    <div class="container right">
+    </div>
+  </div>
+
+</div>
