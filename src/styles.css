@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+html{
+
+        scroll-behavior: smooth;
+}
+
+.fs-36{
+
+        font-size: 36pt;
+    }
+    
+    .fs-18{
+    
+        font-size: 18pt;
+    }
+    
