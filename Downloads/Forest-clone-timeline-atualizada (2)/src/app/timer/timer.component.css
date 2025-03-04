@@ -1,0 +1,29 @@
+
+.timer-container {
+
+    display: flex; /* Ativa o Flexbox */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    gap: 10px; /* Espaçamento entre as divs */
+
+}
+
+.content-m, .content-s {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    padding: 10px; /* Espaçamento interno */
+  
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.time {
+    font-size: 50px;
+    font-weight: bolder;
+
+}
+
+.doispontos{
+
+    font-size: 50px;
+    font-weight: bold;
+}

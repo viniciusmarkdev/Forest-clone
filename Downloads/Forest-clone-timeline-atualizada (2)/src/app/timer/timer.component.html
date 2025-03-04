@@ -1,0 +1,30 @@
+<div class="content" [class.move]="animate">
+    <div id="root">
+        <div class="home__wrap">
+            <div class="home__content"><i>{{texto}}</i>
+                <div class="timer__wrap">
+                    <div class="timer__visual"><img [src]="imagemSrc" alt="tree"></div>
+                </div>
+                <div class="timer-container">
+                    <div class="content-m">
+                        <div class="time">{{minutos| number:'2.0'}}</div>
+                       
+                    </div>
+                    <span class="doispontos">:</span>
+                    <div class="content-s">
+                        <div class="time">{{segundos | number:'2.0'}}</div>
+                      
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            
+        </div>
+
+       
+    </div>
+
+    
+
