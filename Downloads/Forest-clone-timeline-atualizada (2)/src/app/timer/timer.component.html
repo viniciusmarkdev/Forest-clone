@@ -6,25 +6,20 @@
                     <div class="timer__visual"><img [src]="imagemSrc" alt="tree"></div>
                 </div>
                 <div class="timer-container">
+                    <!-- Seta esquerda: decrementa minutos -->
+                    <img class="seta" src="../assets/setaesquerda.png" (click)="decrement('M')">
                     <div class="content-m">
-                        <div class="time">{{minutos| number:'2.0'}}</div>
-                       
+                        <div class="time">{{minutos | number:'2.0'}}</div>
                     </div>
                     <span class="doispontos">:</span>
                     <div class="content-s">
-                        <div class="time">{{segundos | number:'2.0'}}</div>
-                      
+                        <div class="time">{{segundos | number:'2.0'}}</div> 
                     </div>
+                    <!-- Seta direita: incrementa minutos -->
+                    <img class="seta-direita" src="../assets/setadireita.png" (click)="increment('M')">
                 </div>
             </div>
-
-            </div>
-
-            
         </div>
-
-       
     </div>
-
-    
+</div>
 

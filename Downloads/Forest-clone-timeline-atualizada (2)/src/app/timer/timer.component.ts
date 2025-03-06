@@ -43,21 +43,21 @@ export class TimerComponent implements OnInit {
 
   increment(type: 'M' | 'S') {
     if (type === 'M') {
-      if (this.minutos >= 99) return;
-      this.minutos += 1;
+      if (this.minutos >= 120) return;
+      this.minutos += 5;
     } else {
       if (this.segundos >= 59) return;
-      this.segundos += 1;
+      this.segundos += 5;
     }
   }
 
   decrement(type: 'M' | 'S') {
     if (type === 'M') {
       if (this.minutos <= 0) return;
-      this.minutos -= 1;
+      this.minutos -= 5;
     } else {
       if (this.segundos <= 0) return;
-      this.segundos -= 1;
+      this.segundos -= 5;
     }
   }
 
