@@ -40,6 +40,7 @@ export class TimelineComponent  implements OnInit {
 
       this.listaArvores = resp.sort((a, b) => {
         return new Date(b.data).getTime() - new Date(a.data).getTime();
+        
       });
     })
 

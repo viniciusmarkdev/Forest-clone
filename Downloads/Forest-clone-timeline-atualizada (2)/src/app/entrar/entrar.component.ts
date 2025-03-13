@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../model/UserLogin';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
-import { environment } from '../../environments/environments.prod';
+
 import { AlertasService } from '../service/alertas.service';
+import { environment } from '../../environments/environments.prod';
 
 @Component({
   selector: 'app-entrar',
@@ -41,6 +42,8 @@ export class EntrarComponent  implements OnInit{
       environment.foto = this.userLogin.foto
       environment.id = this.userLogin.id
       environment.tipo = this.userLogin.tipo
+      console.log(resp.nome)
+      console.log(resp.id)
 
       this.router.navigate(['/timer'])
 

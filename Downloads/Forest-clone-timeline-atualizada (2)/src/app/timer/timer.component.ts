@@ -1,28 +1,34 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ForestComponent } from '../icons/forest/forest.component';
 import { Arvore } from '../model/Arvore';
 import { ArvoreService } from '../service/arvore.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../model/User';
+import { AuthService } from '../service/auth.service';
+import { environment } from '../../environments/environments.prod';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
-  styleUrl: './timer.component.css'
+  styleUrls: ['./timer.component.css']
 })
 export class TimerComponent implements OnInit {
 
   constructor(
     private arvoreService: ArvoreService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public authService: AuthService
   ) { }
 
   arvore: Arvore = new Arvore();
+  listaArvores: Arvore[];
   idPost: number;
   public minutos: number = 0;
   public segundos: number = 0;
   private timer: any;
   private date = new Date();
+  idUser = environment.id;
+  user: User = new User();
 
   public show: boolean = true;
   public disabled: boolean = false;
@@ -33,8 +39,18 @@ export class TimerComponent implements OnInit {
 
   @ViewChild("idAudio") idAudio!: ElementRef;
 
-  ngOnInit(): void {
-    // Inicialização, se necessário
+  ngOnInit() {
+    window.scroll(0, 0);
+
+    if (environment.token == '') {
+      this.router.navigate(['/entrar']);
+    }
+  }
+
+  findByIdUser() {
+    this.authService.getByIdUser(this.idUser).subscribe((resp: User) => {
+      this.user = resp;
+    });
   }
 
   convertToMilliseconds(): number {
@@ -44,20 +60,20 @@ export class TimerComponent implements OnInit {
   increment(type: 'M' | 'S') {
     if (type === 'M') {
       if (this.minutos >= 120) return;
-      this.minutos += 5;
+      this.minutos += 1;
     } else {
       if (this.segundos >= 59) return;
-      this.segundos += 5;
+      this.segundos += 1;
     }
   }
 
   decrement(type: 'M' | 'S') {
     if (type === 'M') {
       if (this.minutos <= 0) return;
-      this.minutos -= 5;
+      this.minutos -= 1;
     } else {
       if (this.segundos <= 0) return;
-      this.segundos -= 5;
+      this.segundos -= 1;
     }
   }
 
@@ -71,12 +87,17 @@ export class TimerComponent implements OnInit {
     this.minutos = this.date.getMinutes();
     this.segundos = this.date.getSeconds();
 
-    if (this.date.getMinutes() === 0 && this.date.getSeconds() === 0) {
-      // Stop interval
+    // Verifica se o tempo chegou a 00:00
+    if (this.minutos === 0 && this.segundos === 0) {
+      // Para o intervalo
+      this.stop();
+
+      // Toca o áudio e inicia a animação
       this.idAudio.nativeElement.play();
       this.animate = true;
+
+      // Para o áudio após 5 segundos
       setTimeout(() => {
-        this.stop();
         this.idAudio.nativeElement.load();
       }, 5000);
     }
@@ -86,7 +107,8 @@ export class TimerComponent implements OnInit {
     this.disabled = false;
     this.show = true;
     this.animate = false;
-    clearInterval(this.timer);
+    clearInterval(this.timer); // Limpa o intervalo
+    this.timer = null; // Reseta o timer
     this.idAudio.nativeElement.load();
   }
 
@@ -120,13 +142,11 @@ export class TimerComponent implements OnInit {
     return Math.round(totalMinutos).toString();
   };
 
-  start() {
+  plantar() {
     this.texto = 'Get back to work!';
     this.imagemSrc = '../../assets/tree.png';
 
     this.arvore.tempoConcentracao = this.converterParaMinutos();
-
-    alert(this.arvore.tempoConcentracao);
 
     if (this.minutos > 0 || this.segundos > 0) {
       this.disabled = true;
@@ -139,19 +159,22 @@ export class TimerComponent implements OnInit {
         }, 1000);
       }
 
+      this.user.id = this.idUser;
+      this.arvore.usuario = this.user;
+
+      console.log('Payload enviado:', this.arvore);
+
       this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore) => {
         this.arvore.estaMurcha = false;
-        this.arvore = resp;
-
         this.idPost = this.arvore.id;
         alert('ID da árvore criada:' + this.idPost);
         console.log('ID da árvore criada:', this.idPost);
         console.log(this.arvore);
-
+        console.log(this.arvore.usuario.nome);
+        this.arvore = resp;
         this.arvore = new Arvore();
       });
     }
   }
 }
-
 
