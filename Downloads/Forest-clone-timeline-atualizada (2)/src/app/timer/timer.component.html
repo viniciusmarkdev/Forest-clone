@@ -1,25 +1,37 @@
-<div class="content" [class.move]="animate">
+<div class="content" [ngClass]="{'zero-time': isZeroTime}" [class.move]="animate" [ngClass]="{'back-opacity': isTimerRunning}">
     <div id="root">
         <div class="home__wrap">
-            <div class="home__content"><i>{{texto}}</i>
-                <div class="timer__wrap">
-             <div class="timer__visual"><img [src]="imagemSrc" alt="tree" (click)="plantar()"></div>
+            <div class="home__content">
+                <i>{{texto}}</i>
+                <div class="timer__wrap" (click)="start()">
+                    <div class="timer__visual">
+                        <img [src]="imagemSrc" alt="tree">
+                    </div>
                 </div>
-                <div class="timer-container">
-                    <!-- Seta esquerda: decrementa minutos -->
-                    <img class="seta" src="../assets/setaesquerda.png" (click)="decrement('M')">
-                    
+                <div class="content-timer">
                     <div class="content-m">
-                        <div class="time">{{minutos | number:'2.0'}}</div>
+                        <div class="time"></div>
                     </div>
-                    <span class="doispontos">:</span>
+                    
                     <div class="content-s">
-                        <div class="time">{{segundos | number:'2.0'}}</div> 
+                        <div class="time">{{minutos | number:'2.0'}}:{{segundos | number:'2.0'}}<span></span></div>
                     </div>
-                    <!-- Seta direita: incrementa minutos -->
-                    <img class="seta-direita" src="../assets/setadireita.png" (click)="increment('M')">
+                </div>
+
+                <div class="seta-esquerda" *ngIf="!isTimerRunning" (click)="decrement()">
+                    <img [src]="seta1" alt="seta">
+                </div>
+
+                <div class="seta-direita" *ngIf="!isTimerRunning" (click)="increment()">
+                    <img [src]="seta" alt="seta">
+                </div>
+
+                <div class="fEMoAT" *ngIf="isTimerRunning" (click)="reset()">
+                    Give Up
                 </div>
             </div>
         </div>
     </div>
-</div>  
+
+    <div *ngIf="isTimerRunning" class="black-overlay"></div>
+</div>

@@ -1,10 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Arvore } from '../model/Arvore';
 import { ArvoreService } from '../service/arvore.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { User } from '../model/User';
-import { AuthService } from '../service/auth.service';
-import { environment } from '../../environments/environments.prod';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-timer',
@@ -16,165 +13,145 @@ export class TimerComponent implements OnInit {
   constructor(
     private arvoreService: ArvoreService,
     private router: Router,
-    private route: ActivatedRoute,
-    public authService: AuthService
+    private route: ActivatedRoute
   ) { }
 
   arvore: Arvore = new Arvore();
-  listaArvores: Arvore[];
   idPost: number;
   public minutos: number = 0;
   public segundos: number = 0;
   private timer: any;
-  private date = new Date();
-  idUser = environment.id;
-  user: User = new User();
 
   public show: boolean = true;
   public disabled: boolean = false;
   public animate: boolean = false;
+  public isTimerRunning: boolean = false;
+  
+  public isStartDisabled: boolean = true; // Inicialmente desabilitado
+  public isZeroTime: boolean = false; // Controla quando o tempo é 00:00
 
   public imagemSrc = '../../assets/tree.png'; // Caminho da imagem padrão
-  public texto = 'Get back to work!';
+  public texto = 'Click the tree to start planting!';
+  public seta = '../../assets/setadireita.png';
+  public seta1 = '../../assets/setaesquerda.png';
 
   @ViewChild("idAudio") idAudio!: ElementRef;
 
-  ngOnInit() {
-    window.scroll(0, 0);
-
-    if (environment.token == '') {
-      this.router.navigate(['/entrar']);
-    }
+  ngOnInit(): void {
+    this.updateStartButtonState(); // Atualiza o estado do botão ao iniciar
   }
 
-  findByIdUser() {
-    this.authService.getByIdUser(this.idUser).subscribe((resp: User) => {
-      this.user = resp;
-    });
+  // Incrementa o tempo em 5 minutos
+  increment() {
+    if (this.minutos >= 120) return; // Limite de 120 minutos
+    this.minutos += 5; // Incrementa de 5 em 5 minutos
+    this.updateStartButtonState(); // Atualiza o estado do botão
   }
 
-  convertToMilliseconds(): number {
-    return ((this.minutos * 60) + this.segundos) * 1000;
-  }
-
-  increment(type: 'M' | 'S') {
-    if (type === 'M') {
-      if (this.minutos >= 120) return;
-      this.minutos += 1;
+  // Decrementa o tempo em 5 minutos
+  decrement() {
+    if (this.minutos < 5) {
+      this.minutos = 0; // Define como 0 se for menor que 5
     } else {
-      if (this.segundos >= 59) return;
-      this.segundos += 1;
+      this.minutos -= 5; // Decrementa de 5 em 5 minutos
     }
+    this.updateStartButtonState(); // Atualiza o estado do botão
   }
 
-  decrement(type: 'M' | 'S') {
-    if (type === 'M') {
-      if (this.minutos <= 0) return;
-      this.minutos -= 1;
-    } else {
-      if (this.segundos <= 0) return;
-      this.segundos -= 1;
-    }
+  // Atualiza o estado do botão de início
+  updateStartButtonState() {
+    this.isStartDisabled = this.minutos <= 0 && this.segundos <= 0;
   }
 
+  // Atualiza o timer
   updateTimer() {
-    this.date.setMinutes(this.minutos);
-    this.date.setSeconds(this.segundos);
-    this.date.setMilliseconds(0);
-    const time = this.date.getTime();
-    this.date.setTime(time - 1000);
-
-    this.minutos = this.date.getMinutes();
-    this.segundos = this.date.getSeconds();
-
-    // Verifica se o tempo chegou a 00:00
     if (this.minutos === 0 && this.segundos === 0) {
-      // Para o intervalo
-      this.stop();
-
-      // Toca o áudio e inicia a animação
+      // Para o timer quando o tempo acabar
       this.idAudio.nativeElement.play();
       this.animate = true;
-
-      // Para o áudio após 5 segundos
+      this.isZeroTime = true; // Indica que o tempo chegou a 00:00
       setTimeout(() => {
+        this.stop();
         this.idAudio.nativeElement.load();
       }, 5000);
+      return;
+    }
+
+    if (this.segundos === 0) {
+      this.segundos = 59;
+      this.minutos--;
+    } else {
+      this.segundos--;
     }
   }
 
+  // Para o timer
   stop() {
     this.disabled = false;
     this.show = true;
     this.animate = false;
-    clearInterval(this.timer); // Limpa o intervalo
-    this.timer = null; // Reseta o timer
+    this.isZeroTime = false; // Reset quando o timer é parado
+    clearInterval(this.timer);
     this.idAudio.nativeElement.load();
   }
 
+  // Reseta o timer
   reset() {
-    alert("Deseja cancelar essa sessão? Se sim, a árvore será apagada.");
-    alert("Você terá uma árvore murcha.");
+    if (confirm("Deseja cancelar essa sessão? Se sim, a árvore será apagada.")) {
+      alert("Você terá uma árvore murcha.");
 
-    this.minutos = 0;
-    this.segundos = 0;
-    this.stop();
+      // Reinicia o timer
+      this.minutos = 0;
+      this.segundos = 0;
+      this.stop(); // Para o timer e remove a opacidade
 
-    alert(this.idPost);
+      // Define a árvore como murcha
+      this.arvore.estaMurcha = true;
+      this.isTimerRunning = false;
 
-    this.arvore.estaMurcha = true;
+      // Atualiza a árvore no servidor
+      this.arvoreService.encerrarSessão(this.idPost, this.arvore).subscribe((resp: Arvore) => {
+        this.arvore = resp;
+        console.log(resp);
+      });
 
-    this.arvoreService.encerrarSessão(this.idPost, this.arvore).subscribe((resp: Arvore) => {
-      this.arvore = resp;
-      console.log(resp);
-    });
-
-    this.imagemSrc = '../../assets/tree_death.png'; // Caminho da nova imagem
-    this.texto = 'Your tree died!';
+      // Altera a imagem e o texto
+      this.imagemSrc = '../../assets/tree_death.png'; // Imagem da árvore murcha
+      this.texto = 'Your tree died!';
+    }
   }
 
-  converterParaMinutos = (): string => {
-    const minutosMinutos = this.minutos;
-    const minutosSegundos = this.segundos / 60;
+  // Inicia o timer
+  start() {
+    // Verifica se o tempo está zerado
+    if (this.minutos === 0 && this.segundos === 0) {
+        alert("Por favor, defina um tempo antes de iniciar o plantio.");
+        return; // Impede que o timer seja iniciado
+    }
 
-    const totalMinutos = minutosMinutos + minutosSegundos;
-
-    return Math.round(totalMinutos).toString();
-  };
-
-  plantar() {
+    // Se o tempo estiver preenchido, inicia o timer
+    this.isTimerRunning = true; // Define que o timer está em execução
     this.texto = 'Get back to work!';
     this.imagemSrc = '../../assets/tree.png';
 
-    this.arvore.tempoConcentracao = this.converterParaMinutos();
+    this.arvore.tempoConcentracao = this.minutos.toString();
 
-    if (this.minutos > 0 || this.segundos > 0) {
-      this.disabled = true;
-      this.show = false; // Hide btn + and -
-      this.updateTimer();
+    this.disabled = true;
+    this.show = false; // Esconde os botões de incremento/decremento
+    this.updateTimer();
 
-      if (this.segundos > 0) {
-        this.timer = setInterval(() => {
-          this.updateTimer();
-        }, 1000);
-      }
+    this.timer = setInterval(() => {
+        this.updateTimer();
+    }, 1000);
 
-      this.user.id = this.idUser;
-      this.arvore.usuario = this.user;
-
-      console.log('Payload enviado:', this.arvore);
-
-      this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore) => {
+    this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore) => {
         this.arvore.estaMurcha = false;
+        this.arvore = resp;
         this.idPost = this.arvore.id;
         alert('ID da árvore criada:' + this.idPost);
         console.log('ID da árvore criada:', this.idPost);
         console.log(this.arvore);
-        console.log(this.arvore.usuario.nome);
-        this.arvore = resp;
         this.arvore = new Arvore();
-      });
-    }
+    });
   }
 }
-
