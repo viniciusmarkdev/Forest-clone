@@ -41,6 +41,8 @@
     font-size: 40px;
     font-weight: bold;
     color: white; /* Cor do texto */
+    margin-right: -100px;
+    margin-bottom: 70px;
 }
 
 /* Estilo para os contêineres de minutos e segundos */
@@ -52,34 +54,39 @@
     border-radius: 5px; /* Bordas arredondadas */
 }
 
-
-.content-m{
-
+.content-m {
     margin-left: 80px;
     margin-bottom: 40px;
 }
 
-
-.content-s{
-
-    margin-right: 80px;
-    margin-bottom: 40px;
+.content-s {
+    margin-right: 100px;
+    margin-bottom: 100px;
+    position: relative; /* Adicionado para posicionar as setas corretamente */
 }
 
 /* Estilo para as setas */
-
 .seta-direita {
-    margin-right: -330px;
-    margin-top: -55px;
+    position: absolute; /* Posicionamento absoluto em relação ao .content-s */
+    right: -100px; /* Ajuste conforme necessário */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para centralização */
+    cursor: pointer; /* Mostra que o elemento é clicável */
+    z-index: 1002; /* Garante que as setas fiquem acima da .black-overlay */
 }
 
 .seta-esquerda {
-    margin-left: -300px;
-    margin-top: -100px;
+    position: absolute; /* Posicionamento absoluto em relação ao .content-s */
+    left: -1px; /* Ajuste conforme necessário */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para centralização */
+    cursor: pointer; /* Mostra que o elemento é clicável */
+    z-index: 1002; /* Garante que as setas fiquem acima da .black-overlay */
 }
+
 /* Estilo para o botão "Give Up" */
 .fEMoAT {
-    margin-top: 50px;
+    margin-top: -90px;
     border: 1px solid white;
     border-radius: 5px;
     font-size: 16px;

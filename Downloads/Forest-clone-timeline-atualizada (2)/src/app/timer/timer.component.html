@@ -1,37 +1,40 @@
-<div class="content" [ngClass]="{'zero-time': isZeroTime}" [class.move]="animate" [ngClass]="{'back-opacity': isTimerRunning}">
+<div class="content" [class.move]="animate" [ngClass]="{'back-opacity': isTimerRunning}">
     <div id="root">
         <div class="home__wrap">
             <div class="home__content">
+                <!-- Texto -->
                 <i>{{texto}}</i>
-                <div class="timer__wrap" (click)="start()">
+
+                <!-- Imagem da planta -->
+                <div class="timer__wrap" (click)="minutos > 0 ? start() : null" [ngClass]="{'disabled': minutos === 0}">
                     <div class="timer__visual">
                         <img [src]="imagemSrc" alt="tree">
                     </div>
                 </div>
+
+                <!-- Tempo -->
                 <div class="content-timer">
-                    <div class="content-m">
-                        <div class="time"></div>
-                    </div>
-                    
                     <div class="content-s">
                         <div class="time">{{minutos | number:'2.0'}}:{{segundos | number:'2.0'}}<span></span></div>
+                        <!-- Setas -->
+                        <img class="seta-direita" [src]="seta" alt="seta" (click)="increment() " *ngIf="!isTimerRunning">
+                        <img class="seta-esquerda"[src]="seta1" alt="seta" (click)="decrement()"*ngIf="!isTimerRunning">
                     </div>
-                </div>
 
-                <div class="seta-esquerda" *ngIf="!isTimerRunning" (click)="decrement()">
-                    <img [src]="seta1" alt="seta">
-                </div>
-
-                <div class="seta-direita" *ngIf="!isTimerRunning" (click)="increment()">
-                    <img [src]="seta" alt="seta">
+                    
+                <!-- Botão "Give Up" visível apenas quando o timer estiver rodando -->
+                   
                 </div>
 
                 <div class="fEMoAT" *ngIf="isTimerRunning" (click)="reset()">
                     Give Up
                 </div>
+
+                
             </div>
         </div>
     </div>
 
+    <!-- Camada de sobreposição -->
     <div *ngIf="isTimerRunning" class="black-overlay"></div>
 </div>
