@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Arvore } from '../model/Arvore';
 import { ArvoreService } from '../service/arvore.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../model/User';
+import { environment } from '../../environments/environments.prod';
 
 @Component({
   selector: 'app-timer',
@@ -26,34 +28,35 @@ export class TimerComponent implements OnInit {
   public disabled: boolean = false;
   public animate: boolean = false;
   public isTimerRunning: boolean = false;
-  
+  public coin: number = 0;
   public isStartDisabled: boolean = true; // Inicialmente desabilitado
   public isZeroTime: boolean = false; // Controla quando o tempo é 00:00
 
   public imagemSrc = '../../assets/tree.png'; // Caminho da imagem padrão
   public texto = 'Click the tree to start planting!';
-  public seta = '../../assets/setadireita.png';
-  public seta1 = '../../assets/setaesquerda.png';
+  public seta = '../../assets/setadireita.png'; // Caminho da seta direita
+  public seta1 = '../../assets/setaesquerda.png'; // Caminho da seta esquerda
 
-  @ViewChild("idAudio") idAudio!: ElementRef;
+  idUser = environment.id;
+  user: User = new User();
 
   ngOnInit(): void {
     this.updateStartButtonState(); // Atualiza o estado do botão ao iniciar
   }
 
-  // Incrementa o tempo em 5 minutos
+  // Incrementa o tempo em 1 minuto
   increment() {
     if (this.minutos >= 120) return; // Limite de 120 minutos
-    this.minutos += 5; // Incrementa de 5 em 5 minutos
+    this.minutos += 1; // Incrementa de 1 em 1 minuto
     this.updateStartButtonState(); // Atualiza o estado do botão
   }
 
-  // Decrementa o tempo em 5 minutos
+  // Decrementa o tempo em 1 minuto
   decrement() {
-    if (this.minutos < 5) {
-      this.minutos = 0; // Define como 0 se for menor que 5
+    if (this.minutos < 1) {
+      this.minutos = 0; // Define como 0 se for menor que 1
     } else {
-      this.minutos -= 5; // Decrementa de 5 em 5 minutos
+      this.minutos -= 1; // Decrementa de 1 em 1 minuto
     }
     this.updateStartButtonState(); // Atualiza o estado do botão
   }
@@ -67,13 +70,24 @@ export class TimerComponent implements OnInit {
   updateTimer() {
     if (this.minutos === 0 && this.segundos === 0) {
       // Para o timer quando o tempo acabar
-      this.idAudio.nativeElement.play();
       this.animate = true;
       this.isZeroTime = true; // Indica que o tempo chegou a 00:00
-      setTimeout(() => {
-        this.stop();
-        this.idAudio.nativeElement.load();
-      }, 5000);
+
+      // Define a árvore como murcha e atualiza a interface
+      this.arvore.estaMurcha = true;
+      this.isTimerRunning = false; // Garante que o timer não está mais em execução
+      this.imagemSrc = '../../assets/tree_death.png'; // Imagem da árvore murcha
+      this.texto = 'Your tree died!';
+
+      // Para o timer e remove a sobreposição
+      this.stop();
+
+      // Atualiza a árvore no servidor
+      this.arvoreService.encerrarSessão(this.idPost, this.arvore).subscribe((resp: Arvore) => {
+        this.arvore = resp;
+        console.log(resp);
+      });
+
       return;
     }
 
@@ -91,8 +105,8 @@ export class TimerComponent implements OnInit {
     this.show = true;
     this.animate = false;
     this.isZeroTime = false; // Reset quando o timer é parado
+    this.isTimerRunning = false; // Garante que o timer não está mais em execução
     clearInterval(this.timer);
-    this.idAudio.nativeElement.load();
   }
 
   // Reseta o timer
@@ -125,8 +139,8 @@ export class TimerComponent implements OnInit {
   start() {
     // Verifica se o tempo está zerado
     if (this.minutos === 0 && this.segundos === 0) {
-        alert("Por favor, defina um tempo antes de iniciar o plantio.");
-        return; // Impede que o timer seja iniciado
+      alert("Por favor, defina um tempo antes de iniciar o plantio.");
+      return; // Impede que o timer seja iniciado
     }
 
     // Se o tempo estiver preenchido, inicia o timer
@@ -141,17 +155,20 @@ export class TimerComponent implements OnInit {
     this.updateTimer();
 
     this.timer = setInterval(() => {
-        this.updateTimer();
+      this.updateTimer();
     }, 1000);
 
+    this.user.id = this.idUser;
+    this.arvore.usuario = this.user;
+
     this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore) => {
-        this.arvore.estaMurcha = false;
-        this.arvore = resp;
-        this.idPost = this.arvore.id;
-        alert('ID da árvore criada:' + this.idPost);
-        console.log('ID da árvore criada:', this.idPost);
-        console.log(this.arvore);
-        this.arvore = new Arvore();
+      this.arvore.estaMurcha = false;
+      this.arvore = resp;
+      this.idPost = this.arvore.id;
+      alert('ID da árvore criada:' + this.idPost);
+      console.log('ID da árvore criada:', this.idPost);
+      console.log(this.arvore);
+      this.arvore = new Arvore();
     });
   }
 }

@@ -6,11 +6,11 @@ import { EntrarComponent } from './entrar/entrar.component';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
 
 const routes: Routes = [
-  {path:'', redirectTo:'timer', pathMatch: 'full'},
-  {path : 'timer', component:TimerComponent},
-  { path :'timeline' , component:TimelineComponent},
-  { path :'entrar' , component: EntrarComponent},
-  { path :'cadastrar' , component: CadastrarComponent}
+  {path:'', redirectTo:'entrar', pathMatch: 'full'},
+  {path :'timer', component:TimerComponent},
+  {path :'timeline' , component:TimelineComponent},
+  {path :'entrar' , component: EntrarComponent},
+  {path :'cadastrar' , component: CadastrarComponent}
 
 ];
 

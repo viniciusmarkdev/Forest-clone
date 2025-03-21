@@ -19,6 +19,7 @@ import { CadastrarComponent } from './cadastrar/cadastrar.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { CadastrarComponent } from './cadastrar/cadastrar.component';
     AlertasComponent,
     CadastrarComponent,
    
+    
     
 
     
