@@ -1,6 +1,5 @@
 package com.dev.forest.model;
 
-
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,113 +20,95 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_usuarios")
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotNull(message = "O atributo Nome é Obrigatório!")
-	private String nome;
+    @NotNull(message = "O atributo Nome é Obrigatório!")
+    private String nome;
 
-	@NotNull(message = "O atributo Usuário é Obrigatório!")
-	@Email(message = "O atributo Usuário deve ser um email válido!")
-	private String usuario;
+    @NotNull(message = "O atributo Usuário é Obrigatório!")
+    @Email(message = "O atributo Usuário deve ser um email válido!")
+    private String usuario;
 
+    @NotBlank(message = "O atributo Senha é Obrigatório!")
+    @Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
+    private String senha;
 
-	@NotBlank(message = "O atributo Senha é Obrigatório!")
-	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
-	private String senha;
+    private String foto;
 
-	private String foto;
-	
-	private String tipo;
+    private String tipo;
 
-	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("tree")
-	private List<Arvore> avores;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("usuario") 
+    private List<Arvore> arvores;
 
-	
-	public Usuario(Long id, @NotNull(message = "O atributo Nome é Obrigatório!") String nome,
-			@NotNull(message = "O atributo Usuário é Obrigatório!") @Email(message = "O atributo Usuário deve ser um email válido!") String usuario,
-			@NotBlank(message = "O atributo Senha é Obrigatório!") @Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres") String senha,
-			String foto, String tipo) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.usuario = usuario;
-		this.senha = senha;
-		this.foto = foto;
-		this.tipo = tipo;
-	}
+    public Usuario() {
+    }
 
+    public Usuario(Long id, @NotNull String nome, @NotNull @Email String usuario, 
+                   @NotBlank @Size(min = 8) String senha, String foto, String tipo) {
+        this.id = id;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.foto = foto;
+        this.tipo = tipo;
+    }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Usuario() {
-		
-	}
-	
-	
-	
+    public String getNome() {
+        return nome;
+    }
 
-	public List<Arvore> getAvores() {
-		return avores;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setAvores(List<Arvore> avores) {
-		this.avores = avores;
-	}
+    public String getUsuario() {
+        return usuario;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getFoto() {
+        return foto;
+    }
 
-	public String getUsuario() {
-		return usuario;
-	}
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public List<Arvore> getArvores() {
+        return arvores;
+    }
 
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-	
-	
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	
-
+    public void setArvores(List<Arvore> arvores) {
+        this.arvores = arvores;
+    }
 }

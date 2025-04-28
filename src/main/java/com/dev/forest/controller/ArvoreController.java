@@ -50,7 +50,7 @@ public class ArvoreController {
 	@PostMapping("/plantar")
 	public ResponseEntity<Arvore> create(@Valid @RequestBody Arvore arvore){
 		
-		   arvore.setId(0);
+	
 		   arvore.setHoraPlantio(new java.sql.Time(System.currentTimeMillis()));
 		   arvore.setEstaMurcha(false);
 		   arvore.setDiaCriacao(arvore.getDiaCriacao());
