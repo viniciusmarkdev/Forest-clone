@@ -1,16 +1,16 @@
-import { Arvore } from "./Arvore"
+    import { Arvore } from "./Arvore"
 
 
-export class User   {
+    export class User   {
 
-    public id: number 
-    public nome: string
-    public usuario: string
-    public senha : string 
-    public foto : string
-    public tipo : string
-    public arvore:Arvore[]
+        public id: number 
+        public nome: string
+        public usuario: string
+        public senha : string 
+        public foto : string
+        public tipo : string
+        public arvores:Arvore[]
 
-    
+        
 
-}
+    }
