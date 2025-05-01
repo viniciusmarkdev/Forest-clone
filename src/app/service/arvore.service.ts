@@ -33,8 +33,16 @@ export class ArvoreService {
 
     return this.http.put<Arvore>(`http://localhost:8080/arvore/${id}`, arvore )
 
+   }
 
-}
+   
+  updateCoin(id : number , arvore: Arvore):Observable<Arvore>{
+
+    return this.http.put<Arvore>(`http://localhost:8080/arvore/updateCoin/${id}` , arvore)
+  }
+
+
+  
 
 
 

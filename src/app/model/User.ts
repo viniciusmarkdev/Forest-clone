@@ -9,6 +9,7 @@
         public senha : string 
         public foto : string
         public tipo : string
+        public allCoins: number
         public arvores:Arvore[]
 
         
