@@ -38,6 +38,10 @@ public class Usuario {
     private String foto;
 
     private String tipo;
+    
+    private int allCoins;
+    
+    
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("usuario") 
@@ -111,4 +115,26 @@ public class Usuario {
     public void setArvores(List<Arvore> arvores) {
         this.arvores = arvores;
     }
+
+	public int getAllCoins() {
+		return allCoins;
+	}
+
+	public void setAllCoins(int allCoins) {
+		this.allCoins = allCoins;
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

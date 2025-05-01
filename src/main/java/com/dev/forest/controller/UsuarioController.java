@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dev.forest.model.Arvore;
 import com.dev.forest.model.Usuario;
 import com.dev.forest.model.UsuarioLogin;
 import com.dev.forest.repository.UsuarioRepository;
+import com.dev.forest.service.UsuarioCoinService;
 import com.dev.forest.service.UsuarioService;
 
 @RestController
@@ -35,6 +37,11 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	
+	@Autowired
+	private UsuarioCoinService usuarioCoinService;
+	
 		
 		@GetMapping("/all")
 		public ResponseEntity <List<Usuario>> getAll(){
@@ -44,10 +51,41 @@ public class UsuarioController {
 	
 	@GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable long id) {
-        return usuarioRepository.findById(id)
-            .map(resp -> ResponseEntity.ok(resp))
-            .orElse(ResponseEntity.notFound().build());
+       
+		
+		
+		return usuarioRepository.findById(id).map(resp -> ResponseEntity.ok(resp))  .orElse(ResponseEntity.notFound().build());
+	
     }
+	
+	
+	@GetMapping("/{id}/calcularAllCoins")
+	public ResponseEntity<Usuario> calcularAllCoins(@PathVariable Long id ){
+		
+		Optional<Usuario> buscaUsuarioPorId = usuarioRepository.findById(id);
+	
+		Usuario  armazenarUsuario =  buscaUsuarioPorId.get();
+		
+		if(buscaUsuarioPorId.isPresent()) {
+			
+	
+			
+			
+			
+			 armazenarUsuario.setAllCoins(usuarioCoinService.calcularTotalCoins(armazenarUsuario));
+			
+			return ResponseEntity.status(HttpStatus.OK).body(usuarioRepository.save( armazenarUsuario));
+			
+		
+			
+		}
+		
+		return ResponseEntity.notFound().build();
+
+		
+		
+	}
+			
 	
 	@PostMapping("/logar")
 	public ResponseEntity<UsuarioLogin> login(@RequestBody Optional<UsuarioLogin> user) {

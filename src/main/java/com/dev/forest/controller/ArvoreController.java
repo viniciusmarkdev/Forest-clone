@@ -44,8 +44,14 @@ public class ArvoreController {
 	@GetMapping
 	public ResponseEntity<List<Arvore>> getAll(){
 		
+		
 		return ResponseEntity.status(HttpStatus.OK).body(arvoreRepository.findAll());
+		
+		
 	}
+	
+
+	
 	
 	@PostMapping("/plantar")
 	public ResponseEntity<Arvore> create(@Valid @RequestBody Arvore arvore){
@@ -68,8 +74,30 @@ public class ArvoreController {
 		
 }
 	
+	
+	
+	@PutMapping("/updateCoin/{id}")
+	public ResponseEntity<Arvore> updateCoin(@PathVariable Long id , @RequestBody Arvore arvoreCompleta){
+		
+		Optional<Arvore> arvore = arvoreRepository.findById(id);
+		
+		Arvore arvore3 = arvore.get();
+		
+		arvoreCompleta.setCoins(5);
+	
+		if(arvore.isPresent()) {
+			
+			return ResponseEntity.status(HttpStatus.OK).body(arvoreRepository.save(arvoreCompleta));
+		}
+		
+		return ResponseEntity.notFound().build();
+		
+		
+	}
+	
+	
+	
 	@PutMapping("/{id}")
-
 	public ResponseEntity<Arvore> atualizarSessao(@PathVariable Long id , @RequestBody Arvore arvore1){
 
 		
@@ -83,7 +111,7 @@ public class ArvoreController {
 
 		LocalTime horaInicio = arvore2.getHoraPlantio().toLocalTime();
 
-		LocalTime horaFim = arvore1.getHoraTermino().toLocalTime();
+		LocalTime horaFim    = arvore1.getHoraTermino().toLocalTime();
 		
 		long diferencaEmMinutos = horaInicio.until(horaFim, ChronoUnit.MINUTES);
 		
