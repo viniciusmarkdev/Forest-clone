@@ -12,14 +12,6 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./timer.component.css']
 })
 export class TimerComponent implements OnInit {
-
-  constructor(
-    private arvoreService: ArvoreService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService
-  ) { }
-
   arvore: Arvore = new Arvore();
   idPost: number;
   public minutos: number = 0;
@@ -39,27 +31,29 @@ export class TimerComponent implements OnInit {
   public texto = 'Click the tree to start planting!';
   public seta = '../../assets/setadireita.png';
   public seta1 = '../../assets/setaesquerda.png';
-  public arvore1 = null;
-
+  public arvore1: string | null = null;
+  public tresBarras = '../../assets/tres-barras.png';
 
   idUser = environment.id;
   user: User = new User();
+  nome = environment.nome;
+  token = environment.token;
+  id = environment.id;
 
+
+  
+  constructor(
+    private arvoreService: ArvoreService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService
+  ) { }
+
+  
   ngOnInit() {
-
     window.scroll(0, 0);
-
-    if (environment.token == '') {
-      this.router.navigate(['/entrar']);
-    }
-
-
-
-    
-
+    console.log('ID do usuário:', this.idUser);
     this.findByIdUser();
-    this.getAllCoins();
-
   }
 
   findByIdUser() {
@@ -68,16 +62,13 @@ export class TimerComponent implements OnInit {
     });
   }
 
-
-  getAllCoins(){
-
-    this.authService.getAllCoins(this.idUser , this.user).subscribe((resp:User)=>{
-
-
+  getAllCoins() {
+    this.authService.getAllCoins(this.idUser, this.user).subscribe((resp: User) => {
       this.user = resp;
-
+      console.log(resp);
     });
   }
+
   increment() {
     if (this.minutos >= 120) return;
     this.minutos += 1;
@@ -101,27 +92,19 @@ export class TimerComponent implements OnInit {
     if (this.minutos === 0 && this.segundos === 0) {
       this.animate = true;
       this.isZeroTime = true;
-    
       this.isTimerRunning = false;
-
       
-      this.imagemSrc = '../../assets/plant-ball.png';
-      this.arvore1 = '../../assets/pinheiro.png'
+      // Set the completed tree image and hide the default one
+      this.arvore1 = '../../assets/pinheiro.png';
       this.stop();
 
-     
-      this.coin += 5;
       console.log(`Sessão finalizada. +5 coins! Total: ${this.coin}`);
 
-     this.getAllCoins()
-     this.arvoreService.updateCoin(this.idPost , this.arvore).subscribe((resp:Arvore)=>{
-
-
-      this.arvore = resp;
-      this.idPost = this.arvore.id;
-
-     });
-
+      this.arvoreService.updateCoin(this.idPost, this.arvore).subscribe((resp: Arvore) => {
+        this.getAllCoins();
+        this.arvore = resp;
+        this.idPost = this.arvore.id;
+      });
       return;
     }
 
@@ -151,14 +134,14 @@ export class TimerComponent implements OnInit {
 
       this.arvore.estaMurcha = true;
       this.isTimerRunning = false;
+      this.arvore1 = null; // Reset arvore1 to show default image again
+      this.imagemSrc = '../../assets/tree_death.png';
+      this.texto = 'Your tree died!';
 
       this.arvoreService.encerrarSessão(this.idPost, this.arvore).subscribe((resp: Arvore) => {
         this.arvore = resp;
         console.log(resp);
       });
-
-      this.imagemSrc = '../../assets/tree_death.png';
-      this.texto = 'Your tree died!';
     }
   }
 
@@ -170,16 +153,16 @@ export class TimerComponent implements OnInit {
 
     this.authService.getByIdUser(this.idUser).subscribe((user: User) => {
       this.arvore.usuario = user;
-
       this.isTimerRunning = true;
       this.texto = 'Get back to work!';
       this.imagemSrc = '../../assets/tree.png';
+      this.arvore1 = null; // Ensure default image is shown at start
       this.arvore.tempoConcentracao = this.minutos.toString();
       this.disabled = true;
       this.show = false;
 
       this.totalSeconds = 0;
-      this.coin = this.coin; // mantém o valor anterior, se quiser resetar, use `this.coin = 0`
+      this.coin = this.coin;
 
       this.updateTimer();
       this.timer = setInterval(() => {
@@ -190,7 +173,6 @@ export class TimerComponent implements OnInit {
       this.arvoreService.plantar(this.arvore).subscribe((resp: Arvore) => {
         this.arvore = resp;
         this.idPost = this.arvore.id;
-
         alert('ID da árvore criada:' + this.idPost);
         console.log('ID da árvore criada:', this.idPost);
         console.log(this.arvore);

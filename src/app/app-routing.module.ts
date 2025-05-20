@@ -8,7 +8,7 @@ import { CadastrarComponent } from './cadastrar/cadastrar.component';
 const routes: Routes = [
   {path:'', redirectTo:'entrar', pathMatch: 'full'},
   {path :'timer', component:TimerComponent},
-  {path :'timeline' , component:TimelineComponent},
+  {path :'timeline/:id' , component:TimelineComponent},
   {path :'entrar' , component: EntrarComponent},
   {path :'cadastrar' , component: CadastrarComponent}
 

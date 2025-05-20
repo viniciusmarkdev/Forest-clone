@@ -1,77 +1,109 @@
 <div class="aline">
 
 
-  <div class="timeline" *ngFor="let atributos of listaArvores">
+    <div class="timeline" *ngFor="let atributos of user.arvores">
 
 
-    <div class="container right">
+      <div class="container right">
 
-      <div class="dataTermino data">
-        
-        {{atributos.horaTermino}}
-      </div>
+        <div class="dataTermino data">
+          
+          {{atributos.horaTermino}}
+        </div>
 
 
-      <div class="content">
+        <div class="content">
 
-    
-
-        <div  class="tempoConcentracao">{{atributos.tempoConcentracao}} 
-        
-
-          <app-three-dots class="three-dots"></app-three-dots>
       
-        
-        </div> 
 
-        
+          <div  class="tempoConcentracao">{{atributos.tempoConcentracao}} 
+          
 
-
+            <app-three-dots class="three-dots"></app-three-dots>
         
-        <app-clock-svg class="clock"></app-clock-svg>
-    
-
-        
-    
-        <div class="detalhes-hora">
+          
+          </div> 
 
           
+
+
+          
+          <app-clock-svg class="clock"></app-clock-svg>
+      
+
+          
+      
+          <div class="detalhes-hora">
+
+            
+          
+            <div> {{atributos.horaPlantio}}-{{atributos.horaTermino}}</div> 
+          
+          </div>
+
         
-          <div> {{atributos.horaPlantio}}-{{atributos.horaTermino}}</div> 
-         
-        </div>
+          
+          
+          <div class="timer__wrap">
+
+         <div class="timer__visual">
+        
+               
+      
+
+
+        
+       
+   
+        
+
+
+             <div >
 
       
-        
-        
-        <div class="timer__wrap">
+          
+         </div>
+       
+         
+     <div style="position: relative;">
 
-          <div class="timer__visual"><img [src]="imagemSrc" alt="tree"></div>
+      <img *ngIf="atributos.estaMurcha" [src]="imagemSrc" alt="árvore murcha" style="position: absolute; bottom: 0; left: 0; z-index: 1;">
+<img class="solo" [src]="plantball" alt="arvore">
+  <img *ngIf="!atributos.estaMurcha" class="pinheiro" [src]="pinheiro" alt="pinheiro" style="position: absolute; bottom: 0; left: 0; z-index: 1;">
+</div>
+
+
+         </div>
+
+
+      
+         
+  
+          </div>
+
+          <div class="etiqueta">
+
+            <app-tag></app-tag> <h1 class="tag">Estudo</h1>
+
+          </div>
+
+  
+
+          <div class="data">
+            {{atributos.horaPlantio}}
+          </div>
+
+          
         </div>
 
-        <div class="etiqueta">
-
-          <app-tag></app-tag> <h1 class="tag">Estudo</h1>
-
-        </div>
-
- 
-
-        <div class="data">
-          {{atributos.horaPlantio}}
-        </div>
-
-        
+      </div>
+      <div class="container right">
+      
       </div>
 
+
     </div>
-    <div class="container right">
-     
-    </div>
+
 
 
   </div>
-
-
-
-</div>
