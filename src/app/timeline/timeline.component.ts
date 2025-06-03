@@ -25,6 +25,11 @@ export class TimelineComponent  implements OnInit {
 
   public plantball = '../../assets/plant-ball.png';
 
+
+  public treeDeath = '../../assets/tree_death.png';
+
+
+
   listaArvores: Arvore[]
 
   
@@ -45,10 +50,7 @@ export class TimelineComponent  implements OnInit {
   ngOnInit() {
 
 
-      if (environment.token == '') {
-      this.router.navigate(['/entrar']);
-    }
-
+   
  
   window.scroll(0, 0);
 

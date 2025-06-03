@@ -27,12 +27,23 @@ export class TimerComponent implements OnInit {
   public isStartDisabled: boolean = true;
   public isZeroTime: boolean = false;
 
-  public imagemSrc = '../../assets/tree.png';
   public texto = 'Click the tree to start planting!';
   public seta = '../../assets/setadireita.png';
   public seta1 = '../../assets/setaesquerda.png';
   public arvore1: string | null = null;
   public tresBarras = '../../assets/tres-barras.png';
+  public plantball = '../../assets/plant-ball.png';
+  public broto = '../../assets/broto.png';
+
+  // Lista de plantas disponíveis
+  public plantas: string[] = [
+    '../../assets/arvoreGrande.png',
+    '../../assets/flor.png',
+    '../../assets/folhasGrandes.png',
+    '../../assets/girassol.png'
+  ];
+  public plantaAtualIndex: number = 0;
+  public plantaSelecionada: string = this.plantas[0];
 
   idUser = environment.id;
   user: User = new User();
@@ -40,8 +51,6 @@ export class TimerComponent implements OnInit {
   token = environment.token;
   id = environment.id;
 
-
-  
   constructor(
     private arvoreService: ArvoreService,
     private router: Router,
@@ -49,7 +58,6 @@ export class TimerComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  
   ngOnInit() {
     window.scroll(0, 0);
     console.log('ID do usuário:', this.idUser);
@@ -67,6 +75,16 @@ export class TimerComponent implements OnInit {
       this.user = resp;
       console.log(resp);
     });
+  }
+
+  proximaPlanta() {
+    this.plantaAtualIndex = (this.plantaAtualIndex + 1) % this.plantas.length;
+    this.plantaSelecionada = this.plantas[this.plantaAtualIndex];
+  }
+
+  plantaAnterior() {
+    this.plantaAtualIndex = (this.plantaAtualIndex - 1 + this.plantas.length) % this.plantas.length;
+    this.plantaSelecionada = this.plantas[this.plantaAtualIndex];
   }
 
   increment() {
@@ -93,9 +111,6 @@ export class TimerComponent implements OnInit {
       this.animate = true;
       this.isZeroTime = true;
       this.isTimerRunning = false;
-      
-      // Set the completed tree image and hide the default one
-      this.arvore1 = '../../assets/pinheiro.png';
       this.stop();
 
       console.log(`Sessão finalizada. +5 coins! Total: ${this.coin}`);
@@ -134,8 +149,7 @@ export class TimerComponent implements OnInit {
 
       this.arvore.estaMurcha = true;
       this.isTimerRunning = false;
-      this.arvore1 = null; // Reset arvore1 to show default image again
-      this.imagemSrc = '../../assets/tree_death.png';
+      this.arvore1 = null;
       this.texto = 'Your tree died!';
 
       this.arvoreService.encerrarSessão(this.idPost, this.arvore).subscribe((resp: Arvore) => {
@@ -155,8 +169,7 @@ export class TimerComponent implements OnInit {
       this.arvore.usuario = user;
       this.isTimerRunning = true;
       this.texto = 'Get back to work!';
-      this.imagemSrc = '../../assets/tree.png';
-      this.arvore1 = null; // Ensure default image is shown at start
+      this.arvore1 = null;
       this.arvore.tempoConcentracao = this.minutos.toString();
       this.disabled = true;
       this.show = false;
@@ -179,4 +192,4 @@ export class TimerComponent implements OnInit {
       });
     });
   }
-}
+} 

@@ -1,116 +1,141 @@
 .content {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .black-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-    transition: opacity 0.3s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .timer__visual,
 .content-timer,
 .home__content i {
-    position: relative;
-    z-index: 1001;
+  position: relative;
+  z-index: 1001;
 }
 
 .timer__wrap {
-    cursor: pointer;
-    text-align: center;
-    margin-bottom: 20px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .timer__visual img {
-    width: 100px;
-    height: auto;
+  width: 400px;
+  position: relative;
 }
 
 .time {
-    font-size: 40px;
-    font-weight: bold;
-    color: white;
-    margin-right: -100px;
-    margin-bottom: 90px;
-}
-
-.pinheiro{
-
-    width: 150px;
-    height: 150px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  margin-right: -100px;
+  margin-bottom: 90px;
 }
 
 .content-m, .content-s {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .content-m {
-    margin-left: 80px;
-    margin-bottom: 40px;
+  margin-left: 80px;
+  margin-bottom: 40px;
 }
 
 .content-s {
-    margin-right: 100px;
-    margin-bottom: 100px;
-    position: relative;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  position: relative;
 }
 
 .seta-direita {
-    position: absolute;
-    right: -100px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 1002;
+  position: absolute;
+  right: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1002;
 }
 
 .seta-esquerda {
-    position: absolute;
-    left: -1px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 1002;
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 1002;
 }
 
 .fEMoAT {
-    margin-top: -90px;
-    border: 1px solid white;
-    border-radius: 5px;
-    font-size: 16px;
-    line-height: 21px;
-    padding: 6px;
-    cursor: pointer;
-    text-align: center;
-    color: white;
-    position: relative;
-    z-index: 1001;
+  margin-top: -90px;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 21px;
+  padding: 6px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 1001;
 }
 
 .MtDfz {
-    margin-left: 1200px;
-    width: 80px;
-    height: 80px;
-    margin-top: -70px;
+  margin-left: 1200px;
+  width: 80px;
+  height: 80px;
+  margin-top: -70px;
 }
 
 .coin {
-    margin-left: 1065px;
-    font-size: 40px;
-    font-weight: bold;
-    color: white;
+  margin-left: 1065px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
 }
 
 .barras {
-    margin-left: 20px;
+  margin-left: 20px;
+}
+
+/* Solo atrás do pinheiro */
+.solo {
+  position: relative;
+  z-index: 1;
+}
+
+/* Pinheiro na frente */
+.pinheiro2 {
+  position: relative;
+  margin-bottom: -110px;
+  z-index: 5; /* maior que .solo */
+}
+
+.pinheiro {
+ 
+  position: relative;
+  z-index: 5;
+}
+
+.seta-esquerda2{
+
+
+ 
+  
+}
+
+.seta-direita1{
+
+   
 }
