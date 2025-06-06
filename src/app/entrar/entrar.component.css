@@ -1,4 +1,17 @@
-.margin{
+#img-bg {
+    background-image: url('../../assets/landing.png');
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+}
 
-    margin-top:  100px;
- }
+.container-fluid, .row {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Garante que a coluna do formulário tenha scroll se necessário */
+.col-md-6.d-flex {
+    overflow-y: auto;
+}

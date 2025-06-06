@@ -12,6 +12,7 @@ export class Arvore{
     public horaTermino : Date
     public estaMurcha : boolean = false
     public data : Date
+    public  tipoDaArvore : string
     public usuario:User
     
 

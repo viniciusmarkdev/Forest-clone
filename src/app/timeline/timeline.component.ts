@@ -50,6 +50,11 @@ export class TimelineComponent  implements OnInit {
   ngOnInit() {
 
 
+    if (environment.token == '') {
+      
+      this.router.navigate(['/entrar']);
+    }
+
    
  
   window.scroll(0, 0);

@@ -12,11 +12,13 @@
             <img class="solo" [src]="plantball" alt="solo">
 
             <ng-template #defaultTree>
+
               <div class="pinheiro2">
+
                 <img  class="" *ngIf="!isTimerRunning" class="seta-esquerda2" [src]="seta1" alt="seta1" 
-                     (click)="plantaAnterior(); $event.stopPropagation()"style="width: 30px;     height:30px ; margin-bottom:-200px;margin-right: 190px; " >
+                (click)="plantaAnterior(); $event.stopPropagation()" style="width: 30px;     height:30px ; margin-bottom:-200px;margin-right: 190px; " >
                 <img *ngIf="!isTimerRunning" class="seta-direita1" [src]="seta" alt="seta" 
-                     (click)="proximaPlanta(); $event.stopPropagation()"    style="width: 30px;    height:30px;  margin-bottom:-150px;margin-left: 190px;">
+                (click)="proximaPlanta(); $event.stopPropagation()"  style="width: 30px;    height:30px;  margin-bottom:-150px;margin-left: 190px;">
                 
                 <img *ngIf="!isTimerRunning" class="pinheiro" [src]="plantaSelecionada" alt="planta" style="width: 100px; height:100px;">
                 <img *ngIf="isTimerRunning" [src]="broto" class="broto">

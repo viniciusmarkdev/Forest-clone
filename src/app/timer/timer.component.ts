@@ -37,12 +37,15 @@ export class TimerComponent implements OnInit {
 
   // Lista de plantas disponíveis
   public plantas: string[] = [
+
     '../../assets/arvoreGrande.png',
     '../../assets/flor.png',
     '../../assets/folhasGrandes.png',
-    '../../assets/girassol.png'
+    '../../assets/girassol.png',
+    '../../assets/arvoreAzul.png'
   ];
-  public plantaAtualIndex: number = 0;
+
+  public  plantaAtualIndex: number = 0;
   public plantaSelecionada: string = this.plantas[0];
 
   idUser = environment.id;
@@ -83,6 +86,7 @@ export class TimerComponent implements OnInit {
   }
 
   plantaAnterior() {
+
     this.plantaAtualIndex = (this.plantaAtualIndex - 1 + this.plantas.length) % this.plantas.length;
     this.plantaSelecionada = this.plantas[this.plantaAtualIndex];
   }
@@ -170,10 +174,11 @@ export class TimerComponent implements OnInit {
       this.isTimerRunning = true;
       this.texto = 'Get back to work!';
       this.arvore1 = null;
+     
       this.arvore.tempoConcentracao = this.minutos.toString();
       this.disabled = true;
       this.show = false;
-
+      this.arvore.tipoDaArvore = this.plantaSelecionada
       this.totalSeconds = 0;
       this.coin = this.coin;
 
