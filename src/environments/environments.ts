@@ -1,6 +1,7 @@
 export const environment = {
 
-    production: false,
+  production: false,
 
-  };
-  
+  apiUrl: 'https://blogpessoal-deploy.onrender.com'
+
+};

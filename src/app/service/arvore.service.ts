@@ -20,25 +20,25 @@ export class ArvoreService {
 
    getAllTrees():Observable<Arvore[]>{
 
-    return this.http.get<Arvore[]>('http://localhost:8080/arvore')
+    return this.http.get<Arvore[]>('https://forest-clone.onrender.com/arvore')
    }
 
    plantar(arvore : Arvore):Observable<Arvore>{
 
-    return this.http.post<Arvore>('http://localhost:8080/arvore/plantar' , arvore)
+    return this.http.post<Arvore>('https://forest-clone.onrender.com/arvore/plantar' , arvore)
 
    }
 
    encerrarSessão(id : number , arvore : Arvore):Observable<Arvore>{
 
-    return this.http.put<Arvore>(`http://localhost:8080/arvore/${id}`, arvore )
+    return this.http.put<Arvore>(`https://forest-clone.onrender.com/arvore/${id}`, arvore )
 
    }
 
    
   updateCoin(id : number , arvore: Arvore):Observable<Arvore>{
 
-    return this.http.put<Arvore>(`http://localhost:8080/arvore/updateCoin/${id}` , arvore)
+    return this.http.put<Arvore>(`https://forest-clone.onrender.com/arvore/updateCoin/${id}` , arvore)
   }
 
 

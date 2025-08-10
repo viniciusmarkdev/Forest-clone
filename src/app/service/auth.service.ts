@@ -14,13 +14,13 @@ export class AuthService {
 
   entrar(userLogin: UserLogin):Observable<UserLogin>{
 
-    return this.http.post<UserLogin>('http://localhost:8080/usuarios/logar' , userLogin)
+    return this.http.post<UserLogin>('https://forest-clone.onrender.com/usuarios/logar' , userLogin)
 
   }
 
   cadastrar(user: User): Observable<User>{
 
-    return this.http.post<User>('http://localhost:8080/usuarios/cadastrar',user)
+    return this.http.post<User>('https://forest-clone.onrender.com/usuarios/cadastrar',user)
 
 
   }
@@ -28,13 +28,13 @@ export class AuthService {
 
   getAllCoins(id : number , user : User):Observable<User>{
 
-    return this.http.get<User>(`http://localhost:8080/usuarios/${id}/calcularAllCoins`)
+    return this.http.get<User>(`https://forest-clone.onrender.com/usuarios/${id}/calcularAllCoins`)
 
   }
 
   getByIdUser(id: number): Observable<User>{
       
-    return this.http.get<User>(`http://localhost:8080/usuarios/${id}`)
+    return this.http.get<User>(`https://forest-clone.onrender.com/usuarios/${id}`)
     
   }
   
