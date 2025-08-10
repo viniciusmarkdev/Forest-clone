@@ -52,9 +52,7 @@ public class UsuarioController {
 	@GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable long id) {
        
-		
-		
-		return usuarioRepository.findById(id).map(resp -> ResponseEntity.ok(resp))  .orElse(ResponseEntity.notFound().build());
+		return usuarioRepository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	
     }
 	
