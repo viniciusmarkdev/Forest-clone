@@ -16,6 +16,7 @@ import { AlertasComponent } from './alertas/alertas.component';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CadastrarComponent } from './cadastrar/cadastrar.component';
+import { PhotoUserComponent } from './photo-user/photo-user.component';
 
 
 
@@ -32,6 +33,7 @@ import { CadastrarComponent } from './cadastrar/cadastrar.component';
     EntrarComponent,
     AlertasComponent,
     CadastrarComponent,
+    PhotoUserComponent,
    
     
     

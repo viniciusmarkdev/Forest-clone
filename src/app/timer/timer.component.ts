@@ -42,7 +42,12 @@ export class TimerComponent implements OnInit {
     '../../assets/flor.png',
     '../../assets/folhasGrandes.png',
     '../../assets/girassol.png',
-    '../../assets/arvoreAzul.png'
+    '../../assets/arvoreAzul.png',
+    '../../assets/flor1.png',
+    '../../assets/arvoreVermelha.png',
+    '../../assets/bambuJapones.png',
+    '../../assets/plantMagic.png'
+
   ];
 
   public  plantaAtualIndex: number = 0;
@@ -62,6 +67,16 @@ export class TimerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    
+    if (environment.token == '') {
+      
+      this.router.navigate(['/entrar']);
+    }
+
+   
+
+
     window.scroll(0, 0);
     console.log('ID do usuário:', this.idUser);
     this.findByIdUser();

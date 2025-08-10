@@ -1,3 +1,29 @@
+
+  
+  .timeline, .container.right, .content {
+  overflow: hidden !important;
+  height: 100%;
+}
+:host, html, body {
+  overflow: hidden !important;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* 2. CONTAINER PRINCIPAL (sem rolagem) */
+.aline {
+  overflow: hidden !important;
+  height: 100vh;
+  position: fixed; /* ← Isso resolveu antes */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 3. SEU CSS ORIGINAL (INTACTO) ↓↓↓ */
 .content {
   position: relative;
   z-index: 1;
@@ -109,33 +135,42 @@
   margin-left: 20px;
 }
 
-/* Solo atrás do pinheiro */
 .solo {
   position: relative;
   z-index: 1;
 }
 
-/* Pinheiro na frente */
 .pinheiro2 {
   position: relative;
   margin-bottom: -110px;
-  z-index: 5; /* maior que .solo */
+  z-index: 5;
 }
 
 .pinheiro {
- 
   position: relative;
   z-index: 5;
 }
 
-.seta-esquerda2{
-
-
- 
-  
+.seta-esquerda2 {
+  /* mantido */
 }
 
-.seta-direita1{
+.seta-direita1 {
+  /* mantido */
+}
 
-   
+.photoUser{
+
+  margin-right:1200px;
+  font-size: 20px;
+  color: bisque;
+
+}
+
+.userName{
+
+  font-size: 20px;
+  
+  margin-right: 1200px;
+  
 }

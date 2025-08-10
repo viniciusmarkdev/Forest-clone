@@ -1,111 +1,86 @@
-        <div class="aline">
+<div class="aline">
+     <div class="timeline" *ngFor="let atributos of user.arvores">
+                
+            <div class="container right">
 
-
-            <div class="timeline" *ngFor="let atributos of user.arvores">
-              
-           
-
-
-              <div class="container right">
-
-                <div class="dataTermino data">
+                  <div class="dataTermino data">
+                    
+                    {{atributos.horaTermino}}
+                  </div>
                   
-                  {{atributos.horaTermino}}
-                </div>
+                  <div class="content">
+                    <div  class="tempoConcentracao">{{atributos.tempoConcentracao}} 
+                    
 
-
-                <div class="content">
-
-              
-
-                  <div  class="tempoConcentracao">{{atributos.tempoConcentracao}} 
+                      <app-three-dots class="three-dots"></app-three-dots>
                   
+                    
+                    </div> 
 
-                    <app-three-dots class="three-dots"></app-three-dots>
+    
+                    <app-clock-svg class="clock"></app-clock-svg>
+                
+
+                    <div class="detalhes-hora">
+
+        
+                      <div> {{atributos.horaPlantio}}-{{atributos.horaTermino}}</div> 
+                    
+                    </div>
+
+                  
+                    
+                    
+                    <div class="timer__wrap">
+
+                  <div class="timer__visual">
+                  
+                    
+                      <div >
+
+
+                  </div>
                 
                   
-                  </div> 
+              <div style="position: relative;">
 
+                <img *ngIf="atributos.estaMurcha" [src]="treeDeath" alt="árvore murcha" style="position: absolute; bottom: 0; left: 0; z-index: 1;">
+                <img class="solo" [src]="plantball" alt="arvore"> 
+                <img *ngIf="!atributos.estaMurcha" class="pinheiro" [src]="atributos.tipoDaArvore" alt="pinheiro" style="position: absolute; bottom: 0; left: 0; z-index: 1; width: 100px; height: 100px;">
+          </div>
+
+
+                  </div>
+
+
+                
                   
+            
+                    </div>
 
+                    <div class="etiqueta">
 
-                  
-                  <app-clock-svg class="clock"></app-clock-svg>
-              
+                      <app-tag></app-tag> <h1 class="tag">Estudo</h1>
 
-                  
-              
-                  <div class="detalhes-hora">
+                    </div>
+
+            
+
+                    <div class="data">
+                      {{atributos.horaPlantio}}
+                    </div>
 
                     
-                  
-                    <div> {{atributos.horaPlantio}}-{{atributos.horaTermino}}</div> 
-                  
                   </div>
 
-                
-                  
-                  
-                  <div class="timer__wrap">
-
-                <div class="timer__visual">
-                
-                      
-              
-
-
-                
-              
-          
-                
-
-
-                    <div >
-
-              
-                  
                 </div>
-              
+                <div class="container right">
                 
-            <div style="position: relative;">
-
-              <img *ngIf="atributos.estaMurcha" [src]="treeDeath" alt="árvore murcha" style="position: absolute; bottom: 0; left: 0; z-index: 1;">
-              <img class="solo" [src]="plantball" alt="arvore"> 
-              <img *ngIf="!atributos.estaMurcha" class="pinheiro" [src]="atributos.tipoDaArvore" alt="pinheiro" style="position: absolute; bottom: 0; left: 0; z-index: 1; width: 100px; height: 100px;">
-        </div>
-
-
                 </div>
 
 
-              
-                
-          
-                  </div>
-
-                  <div class="etiqueta">
-
-                    <app-tag></app-tag> <h1 class="tag">Estudo</h1>
-
-                  </div>
-
-          
-
-                  <div class="data">
-                    {{atributos.horaPlantio}}
-                  </div>
-
-                  
-                </div>
-
-              </div>
-              <div class="container right">
-              
               </div>
 
 
-            </div>
 
-
-
-  </div>
+    </div>
