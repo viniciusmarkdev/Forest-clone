@@ -1,11 +1,15 @@
-# Fase de construção (build)
-FROM maven:3.8.6-openjdk-17 AS build
+# Fase de construção (build) - usando uma tag disponível oficialmente
+FROM maven:3.8.7-openjdk-17 AS build
 
 # Define o diretório de trabalho
 WORKDIR /app
 
-# Copia todos os arquivos do projeto
+# Copia primeiro o pom.xml para aproveitar cache de dependências
 COPY pom.xml .
+# Baixa as dependências (cache separado do build do código)
+RUN mvn dependency:go-offline
+
+# Copia o restante do código fonte
 COPY src ./src
 
 # Executa o build do Maven, pulando os testes
