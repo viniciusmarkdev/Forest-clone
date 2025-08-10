@@ -49,7 +49,7 @@ EXPOSE 8080
 #Copia o arquivo JAR criado na fase de build (/target/blogPessoal-0.0.1-SNAPSHOT.jar) 
 #da primeira fase ("build") para a segunda fase, renomeando-o para app.jar.
 
-COPY --from=build /target/blogPessoal-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /target/forest-0.0.1-SNAPSHOT.jar app.jar
 
 #ENTRYPOINT ["java", "-jar" , "app.jar"]:
 
