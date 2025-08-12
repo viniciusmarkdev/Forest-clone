@@ -46,7 +46,8 @@ export class TimerComponent implements OnInit {
     '../../assets/flor1.png',
     '../../assets/arvoreVermelha.png',
     '../../assets/bambuJapones.png',
-    '../../assets/plantMagic.png'
+    '../../assets/plantMagic.png',
+    '../../assets/fada.png'
 
   ];
 

@@ -164,6 +164,7 @@ body {
 /* Make all right containers behave like the left ones */
   .right {
     left: 0%;
+    
   }
 }
 

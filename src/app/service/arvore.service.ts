@@ -20,7 +20,7 @@ export class ArvoreService {
 
    getAllTrees():Observable<Arvore[]>{
 
-    return this.http.get<Arvore[]>('https://forest-clone.onrender.com/arvore')
+    return this.http.get<Arvore[]>('https://forest-clone.onrender.com//arvore')
    }
 
    plantar(arvore : Arvore):Observable<Arvore>{
